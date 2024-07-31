@@ -1,99 +1,140 @@
 /* Styles de base pour le header */
 .header {
-   
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 50px 10px 10px;
-    background-color: #f8f8f8;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 50px;
+  background-color: #f8f8f8;
+  border-bottom: 1px solid #e7e7e7;
+  transition: padding 0.3s ease;
+}
+
+.logo {
+  flex: 1;
+}
+
+.logo-image {
+  height: 40px; /* Ajustez cette valeur en fonction de la taille souhaitée pour le logo */
+  transition: transform 0.3s ease;
+}
+
+.logo-image:hover {
+  transform: scale(1.1); /* Effet d'agrandissement au survol */
+}
+
+/* Centrer le menu de navigation */
+.nav-links {
+  display: flex;
+  flex: 2;
+  justify-content: center;
+  gap: 20px;
+  transition: gap 0.3s ease;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #333;
+  font-size: 18px;
+  transition: color 0.3s ease, border-bottom 0.3s ease;
+  border-bottom: 2px solid transparent;
+}
+
+.nav-links a:hover {
+  color: #ff0000;
+  border-bottom: 2px solid #ff9900;
+}
+
+.auth-buttons {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.auth-buttons .btn-signin {
+  text-decoration: none;
+  color: #fff;
+  background-color: #58831e;
+  padding: 10px 15px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease, border-bottom 0.3s ease;
+  border-bottom: 2px solid transparent;
+}
+
+.auth-buttons .btn-signin:hover {
+  background-color: #b30000;
+  border-bottom: 2px solid #b33000;
+}
+
+/* Styles pour le dropdown */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  transform: translateY(10px);
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  font-size: 14px;
+}
+
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.dropdown:hover .dropbtn {
+  color: #ff0000;
+  border-bottom: 2px solid #ff6200;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px 20px;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    width: 100%;
+    align-items: flex-start;
+  }
+
+  .nav-links a {
+    padding: 10px 0;
+    width: 100%;
+    text-align: left;
     border-bottom: 1px solid #e7e7e7;
   }
-  
-  /* Style pour le logo */
-  .logo a, .logo .dropbtn {
-    text-decoration: none;
-    font-size: 24px;
-    color: #333;
-    transition: color 0.3s ease, border-bottom 0.3s ease;
-    border-bottom: 2px solid transparent;
-    background: none;
-    border: none;
-    cursor: pointer;
+
+  .auth-buttons {
+    width: 100%;
+    justify-content: flex-start;
   }
-  
-  .logo a:hover, .logo .dropbtn:hover {
-    color: #ff0000;
-    border-bottom: 2px solid #ff6200;
-  }
-  
-  /* Styles pour les liens de navigation */
-  .nav-links {
-    display: flex;
-    gap: 20px;
-  }
-  
-  .nav-links a {
-    text-decoration: none;
-    color: #333;
-    font-size: 18px;
-    transition: color 0.3s ease, border-bottom 0.3s ease;
-    border-bottom: 2px solid transparent;
-  }
-  
-  .nav-links a:hover {
-    color: #ff0000;
-    border-bottom: 2px solid #ff9900;
-  }
-  
-  /* Styles pour les boutons d'authentification */
+
   .auth-buttons .btn-signin {
-    text-decoration: none;
-    color: #fff;
-    background-color: #ff0000;
-    padding: 10px 15px;
-    border-radius: 4px;
-    transition: background-color 0.3s ease, border-bottom 0.3s ease;
-    border-bottom: 2px solid transparent;
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
   }
-  
-  .auth-buttons .btn-signin:hover {
-    background-color: #b30000;
-    border-bottom: 2px solid #b33000;
-  }
-  
-  /* Styles pour le dropdown */
-  .dropdown {
-    position: relative;
-    display: inline-block;
-  }
-  
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-  }
-  
-  .dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-    font-size: 14px;
-  }
-  
-  .dropdown-content a:hover {
-    background-color: #f1f1f1;
-  }
-  
-  .dropdown:hover .dropdown-content {
-    display: block;
-  }
-  
-  .dropdown:hover .dropbtn {
-    color: #ff0000;
-    border-bottom: 2px solid #ff6200;
-  }
-  
+}

@@ -1,20 +1,26 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Header.css';
+import logoImage from '../assets/logo-cgt.jpg'; // Assurez-vous de mettre le chemin correct vers votre logo
 
 const Header = () => {
   return (
     <header className="header">
       <div className="logo">
-        <div className="dropdown">
+        <Link to="/">
+          <img src={logoImage} alt="Logo" className="logo-image" />
+        </Link>
+      </div>
+      <nav className="nav-links">
+
+      <div className="dropdown">
           <Link to="/" className="dropbtn">Home</Link>
           <div className="dropdown-content">
             <a href="/#nos-equipe">Nos Équipe</a>
             <a href="/#qui-sommes-nous">Qui Sommes-Nous</a>
           </div>
         </div>
-      </div>
-      <nav className="nav-links">
+
         <div className="dropdown">
           <Link to="/actions" className="dropbtn">Nos Actions</Link>
           <div className="dropdown-content">
