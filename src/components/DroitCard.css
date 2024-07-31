@@ -1,0 +1,28 @@
+.droit-card {
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+  }
+  
+  .text-content {
+    flex: 1;
+    padding: 20px;
+  }
+  
+  .image-content {
+    flex: 1;
+  }
+  
+  .image-content img {
+    max-width: 80%;
+    border-radius: 8px;
+  }
+  
+  .image-left .image-content {
+    order: -1;
+  }
+  

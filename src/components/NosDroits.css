@@ -1,0 +1,18 @@
+.nos-actions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .nos-actions section {
+    width: 100%;
+    max-width: 1200px;
+    margin-bottom: 40px;
+  }
+  
+  .nos-actions h2 {
+    margin-bottom: 20px;
+    font-size: 2em;
+  }
+  

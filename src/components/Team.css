@@ -1,0 +1,24 @@
+.team {
+    padding: 40px;
+    text-align: center;
+  }
+  
+  .team h2 {
+    margin-bottom: 40px;
+    font-size: 2.5em;
+  }
+  
+  .team-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  @media (max-width: 768px) {
+    .team-cards {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+  

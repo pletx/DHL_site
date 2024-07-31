@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/static/css/main.9817cf66.css",
+    "main.js": "/static/js/main.e826c89a.js",
+    "static/js/453.69b1c731.chunk.js": "/static/js/453.69b1c731.chunk.js",
+    "static/media/202407_Syndicalisation_Slide4.jpg": "/static/media/202407_Syndicalisation_Slide4.82e5eef1d51d37e90b4d.jpg",
+    "static/media/202407_Syndicalisation_Slide1.jpg": "/static/media/202407_Syndicalisation_Slide1.a0c20c7bdc7a8b0918c1.jpg",
+    "static/media/202407_Syndicalisation_Slide2.jpg": "/static/media/202407_Syndicalisation_Slide2.2b06ce9c3df247241f8f.jpg",
+    "static/media/202407_Syndicalisation_Slide6.jpg": "/static/media/202407_Syndicalisation_Slide6.59df3174eea99862e03d.jpg",
+    "static/media/202407_Syndicalisation_Slide3.jpg": "/static/media/202407_Syndicalisation_Slide3.864b288b9728c8600e54.jpg",
+    "static/media/202407_Syndicalisation_Slide5.jpg": "/static/media/202407_Syndicalisation_Slide5.70772b38005577b64207.jpg",
+    "static/media/Election.jpg": "/static/media/Election.86c216f910c64955c238.jpg",
+    "index.html": "/index.html",
+    "main.9817cf66.css.map": "/static/css/main.9817cf66.css.map",
+    "main.e826c89a.js.map": "/static/js/main.e826c89a.js.map",
+    "453.69b1c731.chunk.js.map": "/static/js/453.69b1c731.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9817cf66.css",
+    "static/js/main.e826c89a.js"
+  ]
+}

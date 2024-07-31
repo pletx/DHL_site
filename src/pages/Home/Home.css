@@ -1,0 +1,82 @@
+/* Styles de base pour la page d'accueil */
+.home-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #f8f8f8;
+  }
+  
+  .minimal-carousel {
+    width: 100%;
+    max-width: 1080px;
+    height: 300px; /* Ajustez la taille ici */
+    margin-bottom: 20px;
+  }
+  
+  .carousel-images {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .carousel-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    transition: opacity 1s ease-in-out;
+  }
+  
+  .carousel-image.active {
+    opacity: 1;
+  }
+  
+  .carousel-text {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+  }
+  
+  .carousel-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 50%;
+  }
+  
+  .carousel-arrow:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+  
+  .prev {
+    left: 10px;
+  }
+  
+  .next {
+    right: 10px;
+  }
+  
+  .about-us-container,
+  .team-container {
+    width: 100%;
+    max-width: 1080px;
+    
+  }
+  
+  #qui-sommes-nous,
+  #nos-equipe {
+    max-width: 1200px;
+    padding: 20px;
+  }
+  

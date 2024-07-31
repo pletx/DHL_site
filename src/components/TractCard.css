@@ -1,0 +1,95 @@
+.tract-card {
+  margin: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  width: 30%;
+}
+
+.tract-card-background {
+  position: relative;
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.overlay {
+  background: rgba(0, 0, 0, 0.5);
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+.tract-card-content {
+  text-align: center;
+}
+
+.expanded {
+  cursor: default;
+  width: 100%;
+}
+
+.expanded-content {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  border: 1px solid #e7e7e7;
+  border-radius: 8px;
+  background-color: #fff;
+  position: relative;
+  width: 70%;
+  margin: 20px auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+.expanded-content img {
+  width: 30%;
+  max-height: auto;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+.tract-card .expanded-content img {
+  width: 45%;
+}
+.tract-card .expanded-content {
+  width: 80%;
+  box-shadow: none;
+  border:none;
+}
+.download-button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 10px;
+}
+
+.download-button:hover {
+  background-color: #0056b3;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #ff0000;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.close-button:hover {
+  background-color: #b30000;
+}
