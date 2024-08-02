@@ -2,11 +2,16 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './Header.css';
 import logoImage from '../assets/logo-cgt.jpg'; // Assurez-vous de mettre le chemin correct vers votre logo
+import bandeauImage from '../assets/Bandeau-cgt.png'; // Assurez-vous que l'image est dans le bon dossier
 
 const Header = () => {
   return (
+    
     <header className="header">
+      
+      <img src={bandeauImage} alt="Bandeau" className="bandeau-image" />
       <div className="logo">
+        
         <Link to="/">
           <img src={logoImage} alt="Logo" className="logo-image" />
         </Link>
