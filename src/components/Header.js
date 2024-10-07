@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Header.css';
-import logoImage from '../assets/logo-cgt.jpg'; // Assurez-vous de mettre le chemin correct vers votre logo
+import logoImage from '../assets/CGT transport.png'; // Assurez-vous de mettre le chemin correct vers votre logo
 import bandeauImage from '../assets/Bandeau-cgt.png'; // Assurez-vous que l'image est dans le bon dossier
 
 const Header = () => {

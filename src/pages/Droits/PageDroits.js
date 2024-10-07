@@ -3,7 +3,13 @@ import DroitCard from '../../components/DroitCard';
 import './PageDroits.css';
 import image1 from "../../assets/202407_Syndicalisation_Slide1.jpg";
 import image2 from "../../assets/202407_Syndicalisation_Slide2.jpg";
-
+import image3 from "../../assets/202407_Syndicalisation_Slide3.jpg";
+import image4 from "../../assets/202407_Syndicalisation_Slide4.jpg";
+import image5 from "../../assets/202407_Syndicalisation_Slide5.jpg";
+import image6 from "../../assets/202407_Syndicalisation_Slide6.jpg";
+import image7 from "../../assets/202407_Syndicalisation_Slide7.jpg";
+import image8 from "../../assets/202407_Syndicalisation_Slide8.jpg";
+import image9 from "../../assets/202407_Syndicalisation_Slide9.jpg";
 const droits = [
   {
     title: "Droit 1",
@@ -15,7 +21,46 @@ const droits = [
     text: "Description du droit 2...",
     image: image2,
   },
-  // Ajoutez d'autres droits ici
+  
+  {
+    title: "Droit 3",
+    text: "Description du droit 3...",
+    image: image3,
+  },
+  
+  {
+    title: "Droit 4",
+    text: "Description du droit 4...",
+    image: image4,
+  },
+  
+  {
+    title: "Droit 5",
+    text: "Description du droit 5...",
+    image: image5,
+  },
+  
+  {
+    title: "Droit 6",
+    text: "Description du droit 6...",
+    image: image6,
+  },
+  
+  {
+    title: "Droit 7",
+    text: "Description du droit 7...",
+    image: image7,
+  },
+  {
+    title: "Droit 8",
+    text: "Description du droit 8...",
+    image: image8,
+  },
+  {
+    title: "Droit 9",
+    text: "Description du droit 9...",
+    image: image9,
+  },
 ];
 
 const NosDroits = () => {

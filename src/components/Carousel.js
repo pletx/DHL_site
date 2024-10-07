@@ -9,7 +9,9 @@ import Slide3 from "../assets/202407_Syndicalisation_Slide3.jpg"
 import Slide4 from "../assets/202407_Syndicalisation_Slide4.jpg"
 import Slide5 from "../assets/202407_Syndicalisation_Slide5.jpg"
 import Slide6 from "../assets/202407_Syndicalisation_Slide6.jpg"
-
+import Slide7 from "../assets/202407_Syndicalisation_Slide7.jpg"
+import Slide8 from "../assets/202407_Syndicalisation_Slide8.jpg"
+import Slide9 from "../assets/202407_Syndicalisation_Slide9.jpg"
 const images = [
     election,
     Slide1,
@@ -18,6 +20,9 @@ const images = [
     Slide4,
     Slide5,
     Slide6,
+    Slide7,
+    Slide8,
+    Slide9,
 ];
 
 const MinimalCarousel = () => {

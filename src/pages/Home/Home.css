@@ -1,32 +1,51 @@
 .home-page {
   padding: 20px;
-  background: linear-gradient(135deg, #d8d8d8, #d6d6d6);
+  background: linear-gradient(135deg, #f7d6d6, #f7e9c8);
+  min-height: 100vh;
 }
-
 
 .content-wrapper {
   display: flex;
   justify-content: space-between;
   gap: 20px;
+  align-items: stretch; /* Alignement des sections pour qu'elles aient la même hauteur */
+  height: 500px;
+  margin: 10px;
 }
 
 .left-content,
 .right-content {
   flex: 1;
-}
-
-section {
-  background: linear-gradient(135deg, #ff6b6b, #ffd885);
-  margin: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  border: 1px solid #ccc;
-}
-
-#qui-sommes-nous {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  max-height: 500px; /* Limite la hauteur des sections */
+}
+
+.left-content {
+  margin-right: 20px;
+}
+
+.right-content {
+  margin-left: 20px;
+}
+
+section {
+  margin: 20px;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+  background: rgba(253, 253, 253, 0.8);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%; /* Prend toute la hauteur disponible */
+}
+
+section:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.25);
 }
 
 @media (max-width: 768px) {
@@ -34,7 +53,10 @@ section {
     flex-direction: column;
   }
 
-  .bandeau-image {
-    margin-bottom: 10px;
+  .left-content,
+  .right-content {
+    margin: 0; /* Supprime l'espacement latéral sur les petits écrans */
+    margin-bottom: 20px; /* Ajoute un espacement vertical entre les sections */
+    max-height: unset; /* Permet aux sections de s'adapter à la hauteur du contenu */
   }
 }
