@@ -1,75 +1,87 @@
+/* Styles de base pour TractCard */
 .tract-card {
-  margin: 20px;
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
-  width: 30%;
-}
-
-.tract-card-background {
   position: relative;
-  height: 200px;
+  width: 30%;
+  height: 30vh; /* Ajustez la hauteur comme nécessaire */
+  margin: 20px auto;
+  border-radius: 15px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, height 0.3s ease;
   background-size: cover;
   background-position: center;
-  border-radius: 8px;
-  overflow: hidden;
+  color: white; /* Le texte sera blanc pour contraster avec l'image de fond */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  background-repeat: no-repeat;
 }
 
-.overlay {
-  background: rgba(0, 0, 0, 0.5);
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
+.tract-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.25);
 }
 
 .tract-card-content {
+  position: relative;
+  z-index: 2; /* Assurer que le contenu soit au-dessus de l'image de fond */
+  padding: 20px;
   text-align: center;
+  background: rgba(0, 0, 0, 0.5); /* Fond semi-transparent pour une meilleure lisibilité du texte */
+  border-radius: 15px;
+  width: 100%;
+  height: 100%;
+}
+
+.tract-card-content h2 {
+  margin: 0;
+  font-size: 2em; /* Utilisation d'unités relatives */
 }
 
 .expanded {
-  cursor: default;
-  width: 100%;
+  width: 90%;
+  height: auto; /* La hauteur s'ajuste automatiquement au contenu */
+  margin: 20px auto;
+  background: white;
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.25);
+  flex-direction: column;
+}
+
+.expanded .tract-card-background {
+  display: none;
 }
 
 .expanded-content {
+  justify-content: center;
   padding: 20px;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  border: 1px solid #e7e7e7;
-  border-radius: 8px;
-  background-color: #fff;
-  position: relative;
-  width: 70%;
-  margin: 20px auto;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  color: black; /* Changer le texte en noir pour l'état étendu */
+
 }
 
+.expanded-content h2 {
+  font-size: 2em;
+  margin-bottom: 10px;
+}
 
 .expanded-content img {
-  width: 30%;
-  max-height: auto;
-  border-radius: 8px;
-  margin-bottom: 20px;
+  width: 100%;
+  height: auto;
+  margin: 20px 0;
+  border-radius: 10px;
 }
-.tract-card .expanded-content img {
-  width: 45%;
-}
-.tract-card .expanded-content {
-  width: 80%;
-  box-shadow: none;
-  border:none;
-}
+
 .download-button {
+  width: 100%;
+  display: inline-block;
   background-color: #007bff;
   color: white;
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
   text-decoration: none;
-  display: inline-block;
-  margin-top: 10px;
+  cursor: pointer;
 }
 
 .download-button:hover {
@@ -80,16 +92,61 @@
   position: absolute;
   top: 10px;
   right: 10px;
-  background-color: #ff0000;
-  color: #fff;
+  background: red;
+  color: white;
   border: none;
   border-radius: 50%;
   width: 30px;
   height: 30px;
-  font-size: 16px;
   cursor: pointer;
+  font-size: 1.2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3; /* Assurer que le bouton soit au-dessus de tout */
 }
 
-.close-button:hover {
-  background-color: #b30000;
+@media (max-width: 768px) {
+  .tract-card {
+    width: 100%;
+    height: 50vh; /* Ajuster la hauteur pour les écrans plus petits */
+  }
+
+  .expanded-content h2 {
+    font-size: 1.5em;
+  }
+
+  .expanded-content p {
+    font-size: 0.9em;
+  }
+
+  .expanded-content img {
+    width: 100%;
+  }
+
+  .tract-card-content h2 {
+    font-size: 1.2em;
+  }
+}
+
+@media (max-width: 480px) {
+  .expanded-content h2 {
+    font-size: 1.2em;
+  }
+
+  .expanded-content p {
+    font-size: 0.8em;
+  }
+
+  .expanded-content img {
+    width: 100%;
+  }
+
+  .tract-card {
+    height: 40vh; /* Ajuster la hauteur pour les écrans plus petits */
+  }
+
+  .tract-card-content h2 {
+    font-size: 1em;
+  }
 }

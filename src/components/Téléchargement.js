@@ -4,7 +4,6 @@ import './Téléchargement.css';
 const Téléchargement = () => {
   return (
     <div className="telechargement-container">
-      <h2>Téléchargement</h2>
       {/* Remplacez ces éléments avec vos documents réels */}
       <a href="/path/to/document1.pdf" className="telechargement-link" download>
         Télécharger Document 1

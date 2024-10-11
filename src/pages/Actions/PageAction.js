@@ -2,9 +2,11 @@ import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import ActionCard from '../../components/ActionCard';
 import TractCard from '../../components/TractCard'; // Assuming TractCard is already created similarly
+import Téléchargement from '../../components/Téléchargement'; // Importing the Téléchargement component
 import './PageAction.css';
-import image1 from "../../assets/202407_Syndicalisation_Slide5.jpg"
-import image2 from "../../assets/202407_Syndicalisation_Slide1.jpg"
+import image1 from "../../assets/202407_Syndicalisation_Slide5.jpg";
+import image2 from "../../assets/202407_Syndicalisation_Slide1.jpg";
+
 const actions = [
   {
     title: "Action 1",
@@ -97,11 +99,7 @@ const NosActions = () => {
       </section>
       <section id="telechargement-section">
         <h2>Téléchargements</h2>
-        {downloads.map((download, index) => (
-          <div key={index} className="download-item">
-            <a href={download.pdfLink} download className="download-link">{download.title}</a>
-          </div>
-        ))}
+        <Téléchargement />
       </section>
     </div>
   );

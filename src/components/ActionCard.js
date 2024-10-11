@@ -14,7 +14,11 @@ const ActionCard = ({ title, text, image }) => {
   };
 
   return (
-    <div className={`action-card ${isExpanded ? 'expanded' : ''}`} onClick={!isExpanded ? handleExpandClick : null}>
+    <div
+      className={`action-card ${isExpanded ? 'expanded' : ''}`}
+      onClick={!isExpanded ? handleExpandClick : null}
+      style={!isExpanded ? { backgroundImage: `url(${image})` } : null}
+    >
       {isExpanded ? (
         <div className="expanded-content">
           <button className="close-button" onClick={handleCloseClick}>X</button>
@@ -23,13 +27,9 @@ const ActionCard = ({ title, text, image }) => {
           <p>{text}</p>
         </div>
       ) : (
-        <div className="action-card-background" style={{ backgroundImage: `url(${image})` }}>
-          <div className="overlay">
-            <div className="action-card-content">
-              <h2>{title}</h2>
-              <p className="short-text">{text.substring(0, 100)}...</p>
-            </div>
-          </div>
+        <div className="action-card-content">
+          <h2>{title}</h2>
+          <p className="short-text">{text.substring(0, 100)}...</p>
         </div>
       )}
     </div>

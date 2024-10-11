@@ -1,13 +1,18 @@
 .droit-card {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 20px;
+  justify-content: center; /* Centrer horizontalement */
+  padding: 5px;
   border-radius: 15px;
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
   background: rgba(253, 253, 253, 0.8);
-  margin: 20px 0;
+  margin: 20px auto; /* Centrer le composant */
+  width: 90vw; /* 90% de la largeur de l'écran */
+  height: 60vh; /* 60% de la hauteur de l'écran */
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  flex-wrap: wrap; /* Permettre le wrap sur les petits écrans */
+  overflow: hidden; /* Empêcher le débordement du contenu */
+  text-align: center; /* Centrer le texte */
 }
 
 .droit-card:hover {
@@ -18,15 +23,20 @@
 .text-content {
   flex: 1;
   padding: 20px;
+  box-sizing: border-box; /* Assurez-vous que le padding soit inclus dans la largeur */
+  max-height: 100%; /* S'assurer que le contenu texte ne dépasse pas la hauteur du parent */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centrer verticalement */
 }
 
 .text-content h2 {
-  font-size: 24px;
-  margin-bottom: 10px;
+  font-size: 2em; /* Utilisation d'unités relatives */
+  margin-bottom: 0.5em;
 }
 
 .text-content p {
-  font-size: 16px;
+  font-size: 1em;
   line-height: 1.5;
 }
 
@@ -36,10 +46,14 @@
   justify-content: center;
   align-items: center;
   width: 100%;
+  max-height: 100%; /* S'assurer que l'image ne dépasse pas la hauteur du parent */
+  overflow: hidden; /* Empêcher le débordement de l'image */
 }
 
 .image-content img {
-  max-width: 100%;
+  width: 55%;
+  height: 100%;
+  object-fit: contain; /* Assurer que l'image reste dans le conteneur tout en étant entièrement visible */
   border-radius: 10px;
 }
 
@@ -51,22 +65,36 @@
   order: -1;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .droit-card {
     flex-direction: column;
-    text-align: center;
+    height: auto; /* Ajuster la hauteur automatiquement */
   }
 
-  .image-content {
-    margin-bottom: 20px;
-    order: 0;
-  }
-
-  .text-content {
-    padding: 0;
+  .text-content, .image-content {
+    width: 100%;
+    height: auto; /* Ajuster la hauteur automatiquement */
   }
 
   .image-right .image-content, .image-left .image-content {
     order: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .droit-card {
+    padding: 10px;
+  }
+
+  .text-content {
+    height: 50%; 
+  }
+
+  .text-content h2 {
+    font-size: 1.5em;
+  }
+
+  .text-content p {
+    font-size: 0.9em;
   }
 }
