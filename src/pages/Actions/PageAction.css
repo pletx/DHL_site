@@ -33,8 +33,7 @@ section:hover {
 
 .action-card img,
 .tract-card img {
-  max-width: 33%;
-  height: auto;
+  height: 30%;
   border-radius: 10px;
 }
 
@@ -70,7 +69,7 @@ section:hover {
 
   .action-card img,
   .tract-card img {
-    margin-right: 20px;
+    width: 50%;
   }
 }
 
