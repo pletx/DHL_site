@@ -60,7 +60,6 @@ section:hover {
   .nos-actions {
     grid-template-columns: repeat(2, 1fr);
   }
-
   .action-card,
   .tract-card {
     flex-direction: row;
@@ -71,10 +70,16 @@ section:hover {
   .tract-card img {
     width: 50%;
   }
+
 }
 
-@media (min-width: 1024px) {
+@media (max-width: 768px) {
+  section{
+    margin: 0px;
+    padding: 0px;
+  }
   .nos-actions {
     grid-template-columns: repeat(3, 1fr);
   }
+
 }
