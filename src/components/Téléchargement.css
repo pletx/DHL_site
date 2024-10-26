@@ -1,45 +1,38 @@
 .telechargement-container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 20px;
-    max-width: 90vw; /* Limiter la largeur du conteneur */
-    padding: 20px; /* Centrer horizontalement */
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  
+}
 
-  }
-  
-  .telechargement-container h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    width: 100%;
-  }
-  
-  .telechargement-link {
-    background-color: #007bff;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    text-decoration: none;
-    display: inline-block;
-    margin: 20px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .telechargement-link:hover {
-    background-color: #0056b3;
-  }
-  
-  @media (max-width: 600px) {
-    .telechargement-container {
-      padding: 10px;
-    }
-  
-    .telechargement-link {
-      width: 100%; /* S'assurer que le lien prend toute la largeur du conteneur */
-      text-align: center; /* Centrer le texte à l'intérieur du lien */
-    }
-  }
-  
+.theme-section {
+  margin-bottom: 20px;
+}
+
+.theme-title {
+  font-size: 1.5em;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.theme-files {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.telechargement-link {
+  text-decoration: none;
+  color: #333;
+  padding: 8px 12px;
+  border: 1px solid #007bff;
+  border-radius: 5px;
+  background-color: #f8f8f8;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  width: fit-content;
+}
+
+.telechargement-link:hover {
+  text-decoration: underline;
+}

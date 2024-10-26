@@ -65,6 +65,7 @@ const droits = [
 
 const NosDroits = () => {
   return (
+    <div id="page-droits">
     <div className="nos-droits">
       {droits.map((droit, index) => (
         <DroitCard
@@ -75,6 +76,7 @@ const NosDroits = () => {
           isImageRight={index % 2 === 1} // Alternance des images
         />
       ))}
+    </div>
     </div>
   );
 };
