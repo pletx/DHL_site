@@ -35,3 +35,9 @@
 .telechargement-link:hover {
   text-decoration: underline;
 }
+@media (max-width: 1024px) {
+  .theme-files  {
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+  }}

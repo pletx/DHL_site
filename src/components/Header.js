@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import './Header.css';
 import logoImage from '../assets/CGT transport.png';
@@ -10,6 +10,7 @@ const Header = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -18,9 +19,10 @@ const Header = () => {
     }
   }, []);
 
-  const handleLogin = async (e) => {
+  const handleLogin = useCallback(async (e) => {
     e.preventDefault();
     setError('');
+    setLoading(true);
 
     try {
       const response = await fetch('http://localhost:5000/api/admin/auth/login', {
@@ -38,16 +40,20 @@ const Header = () => {
         localStorage.setItem('token', data.token);
         setIsLoggedIn(true);
         setShowLogin(false);
+        setUsername('');  // Réinitialiser le champ
+        setPassword('');  // Réinitialiser le champ
         window.location.reload();  // Recharger la page après connexion
       } else {
-        setError(data.message || 'Login failed');
+        setError(data.message || 'Échec de la connexion');
       }
     } catch (err) {
-      setError('An error occurred. Please try again.');
+      setError('Une erreur est survenue. Veuillez réessayer.');
+    } finally {
+      setLoading(false);
     }
-  };
+  }, [username, password]);
 
-  const handleLogout = async () => {
+  const handleLogout = useCallback(async () => {
     try {
       const response = await fetch('http://localhost:5000/api/admin/auth/logout', {
         method: 'POST',
@@ -60,9 +66,9 @@ const Header = () => {
         window.location.reload();  // Recharger la page après déconnexion
       }
     } catch (err) {
-      console.error('Logout failed:', err);
+      console.error('Déconnexion échouée :', err);
     }
-  };
+  }, []);
 
   return (
     <header className="header">
@@ -107,7 +113,7 @@ const Header = () => {
               <h2>Login</h2>
               {error && <p className="error-message">{error}</p>}
               <div className="form-group">
-                <label htmlFor="username">Username:</label>
+                <label htmlFor="username">Nom d'utilisateur :</label>
                 <input
                   type="text"
                   id="username"
@@ -117,7 +123,7 @@ const Header = () => {
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="password">Password:</label>
+                <label htmlFor="password">Mot de passe :</label>
                 <input
                   type="password"
                   id="password"
@@ -126,7 +132,7 @@ const Header = () => {
                   required
                 />
               </div>
-              <button type="submit">Login</button>
+              <button type="submit" disabled={loading}>{loading ? 'Chargement...' : 'Login'}</button>
             </form>
           </div>
         </div>

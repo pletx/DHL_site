@@ -46,7 +46,7 @@
   font-weight: bold;
   padding: 10px 15px;
   border-radius: 5px;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease; /* Ajout de transition */
 }
 
 .nav-links a:hover {
@@ -93,6 +93,8 @@
 
 .auth-buttons {
   align-self: center;
+  display: flex; /* Utilisation de flex pour une meilleure disposition */
+  gap: 10px; /* Espacement entre les boutons */
 }
 
 .btn-signin {
@@ -107,7 +109,7 @@
 }
 
 .btn-signin:hover {
-  background-color: #0056b3;
+  background-color: #0056b3; /* Couleur plus foncée pour le survol */
 }
 
 .login-container {
@@ -157,7 +159,7 @@ button {
 }
 
 button:hover {
-  background-color: #0056b3;
+  background-color: #0056b3; /* Couleur plus foncée pour le survol */
 }
 
 .error-message {
@@ -228,6 +230,7 @@ button:hover {
     display: flex;
     margin-top: 10px;
     flex-direction: column;
+    background-color: #ffdd6c;
   }
 }
 

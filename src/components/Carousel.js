@@ -3,7 +3,6 @@ import './Carousel.css';
 import { useDropzone } from 'react-dropzone';
 import { FaArrowLeft, FaArrowRight, FaTrash } from 'react-icons/fa';
 import axios from 'axios';
-import election from "../assets/Election.jpg";
 import Slide1 from "../assets/202407_Syndicalisation_Slide1.jpg";
 import Slide2 from "../assets/202407_Syndicalisation_Slide2.jpg";
 import Slide3 from "../assets/202407_Syndicalisation_Slide3.jpg";
@@ -15,7 +14,6 @@ import Slide8 from "../assets/202407_Syndicalisation_Slide8.jpg";
 import Slide9 from "../assets/202407_Syndicalisation_Slide9.jpg";
 
 const staticImages = [
-    election,
     Slide1,
     Slide2,
     Slide3,
@@ -31,6 +29,7 @@ const MinimalCarousel = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [images, setImages] = useState(staticImages);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [imageUrl, setImageUrl] = useState('');
 
   useEffect(() => {
     const token = localStorage.getItem('token');

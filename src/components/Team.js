@@ -48,7 +48,7 @@ const Team = () => {
     }
   };
 
-  const handleEditTeammate = async (id) => {
+  const handleEditTeammate = (id) => {
     const teammate = teammates.find(t => t._id === id);
     setEditTeammate(teammate);
   };

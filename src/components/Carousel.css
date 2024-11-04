@@ -13,8 +13,8 @@
 }
 
 .carousel-image {
-  width: 100%; /* L'image remplit le conteneur */
-  max-height: 500px; /* Hauteur maximale de l'image */
+  
+  max-height: 400px; /* Hauteur maximale de l'image */
   object-fit: cover; /* Pour éviter la déformation de l'image */
 }
 
