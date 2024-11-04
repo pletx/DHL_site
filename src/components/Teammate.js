@@ -1,14 +1,18 @@
 import React from 'react';
 import './Teammate.css';
 
-const Teammate = ({ name, role, image }) => {
+const Teammate = ({ id, name, role, image, isAdmin, onEdit, onDelete }) => {
   return (
     <div className="teammate-card">
       <img src={image} alt={`${name}`} className="teammate-image" />
-      <div className="teammate-info">
-        <h3>{name}</h3>
-        <p>{role}</p>
-      </div>
+      <h3>{name}</h3>
+      <p>{role}</p>
+      {isAdmin && (
+        <div className="admin-buttons">
+          <button onClick={() => onEdit(id)}>Modifier</button>
+          <button onClick={() => onDelete(id)}>Supprimer</button>
+        </div>
+      )}
     </div>
   );
 };

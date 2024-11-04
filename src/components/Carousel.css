@@ -1,81 +1,77 @@
-.minimal-carousel {
+.carousel-container {
   position: relative;
-  width: 33vw; /* Limiter la largeur à environ un tiers de l'écran */
-  max-width: 400px; /* Définir une largeur maximale */
-  margin: 0 auto;
-  overflow: hidden;
-  border-radius: 15px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  transition: width 0.5s ease-in-out; /* Ajout d'une transition pour l'animation de la largeur */
+  max-width: 100%; /* Limite la largeur maximale */
+  margin: auto; /* Centrage horizontal */
+  overflow: hidden; /* Cache le débordement des images */
 }
 
-.carousel-images {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  min-height: 400px;
+.carousel {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.5s ease-in-out;
+  justify-content: center; /* Centrer l'image */
+  align-items: center; /* Centrer verticalement */
+  transition: transform 0.5s ease; /* Animation de transition */
 }
 
 .carousel-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* Ajuster les images pour couvrir la zone sans changer les proportions */
+  width: 100%; /* L'image remplit le conteneur */
+  max-height: 500px; /* Hauteur maximale de l'image */
+  object-fit: cover; /* Pour éviter la déformation de l'image */
 }
 
-.carousel-arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: rgba(0, 0, 0, 0.5);
-  color: white;
-  border: none;
-  padding: 10px;
-  cursor: pointer;
-  z-index: 2;
-  transition: background-color 0.3s ease;
+.carousel-button {
+  position: relative;
+  transform: translateY(-50%); /* Ajuste le positionnement */
+  background: rgba(255, 255, 255, 0.7); /* Fond semi-transparent */
+  border: none; /* Pas de bordure */
+  border-radius: 5px; /* Coins arrondis */
+  cursor: pointer; /* Curseur pointer */
+  padding: 10px; /* Espacement interne */
+  width: auto;
+  z-index: 10; /* S'assurer que les boutons sont au-dessus */
 }
 
-.carousel-arrow:hover {
-  background-color: rgba(0, 0, 0, 0.8);
+.carousel-button.left {
+  left: 10px; /* Positionnement à gauche */
+  top: 50%; /* Centrer verticalement */
 }
 
-.prev {
-  left: 10px;
+.carousel-button.right {
+  right: 10px; /* Positionnement à droite */
+  top: 50%; /* Centrer verticalement */
 }
 
-.next {
-  right: 10px;
+.dropzone {
+  border: 2px dashed #007bff; /* Bordure en pointillés */
+  padding: 20px; /* Espacement interne */
+  text-align: center; /* Alignement du texte */
+  margin-top: 10px; /* Marge supérieure */
+  border-radius: 10px; /* Coins arrondis */
 }
 
-.carousel-text {
-  position: absolute;
-  bottom: 20px;
-  left: 20px;
-  color: white;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-  z-index: 1;
+.image-list {
+  display: flex; /* Flexbox pour le conteneur d'images */
+  flex-wrap: wrap; /* Permet à l'image de passer à la ligne suivante */
+  justify-content: center; /* Centrer les images */
+  margin-top: 20px; /* Marge supérieure */
 }
 
-/* Media queries pour différentes tailles d'écran */
-@media (max-width: 1200px) {
-  .minimal-carousel {
-    width: 50vw; /* Ajuster la largeur à 50% de l'écran pour les écrans moyens */
-  }
+.image-item {
+  position: relative; /* Position relative pour le bouton de suppression */
+  margin: 10px; /* Espacement entre les images */
 }
 
-@media (max-width: 768px) {
-  .minimal-carousel {
-    width: 80vw; /* Ajuster la largeur à 80% de l'écran pour les petits écrans */
-  }
+.uploaded-image {
+  width: 100px; /* Largeur de l'image téléchargée */
+  height: 100px; /* Hauteur de l'image téléchargée */
+  object-fit: cover; /* Pour éviter la déformation de l'image */
+  border-radius: 5px; /* Coins arrondis */
 }
 
-@media (max-width: 480px) {
-  .minimal-carousel {
-    width: 100vw; /* Ajuster la largeur à 100% de l'écran pour les très petits écrans */
-    border-radius: 0; /* Supprimer les bordures arrondies pour les petits écrans */
-  }
+.image-item button {
+  position: absolute; /* Positionnement absolu pour le bouton de suppression */
+  top: 5px; /* Position du bouton en haut à gauche */
+  right: 5px; /* Position du bouton en haut à droite */
+  border: none; /* Pas de bordure */
+  cursor: pointer; /* Curseur pointer */
+  width: auto;
 }

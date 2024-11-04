@@ -1,32 +1,32 @@
 .teammate-card {
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    transition: transform 0.3s ease-in-out;
-    text-align: center;
-  }
-  
-  .teammate-card:hover {
-    transform: translateY(-10px);
-  }
-  
-  .teammate-image {
-    width: 100%;
-    height: auto;
-  }
-  
-  .teammate-info {
-    padding: 20px;
-  }
-  
-  .teammate-info h3 {
-    margin: 10px 0;
-    font-size: 1.5em;
-  }
-  
-  .teammate-info p {
-    color: #666;
-    font-size: 1em;
-  }
-  
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px;
+  width: 200px;
+  text-align: center;
+  position: relative; /* Ajoutez cette ligne si nécessaire */
+}
+
+.teammate-card img {
+  width: 100%;
+  height: auto;
+}
+
+.admin-buttons {
+  margin-top: 10px;
+}
+
+.admin-buttons button {
+  margin-right: 5px;
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.admin-buttons button:hover {
+  background-color: #0056b3;
+}

@@ -18,22 +18,28 @@ const HomePage = () => {
         }
       }
     };
-    handleHashChange(); // To handle the initial load or hash changes
-  }, [location]);
+
+    // Gestion initiale du défilement et ajout de l'écouteur pour les changements de hash
+    handleHashChange();
+    window.addEventListener("hashchange", handleHashChange);
+
+    // Nettoyage de l'écouteur d'événements
+    return () => {
+      window.removeEventListener("hashchange", handleHashChange);
+    };
+  }, [location.pathname]); // Dépendance à location.pathname
 
   return (
     <div className="home-page">
-     
       <div className="content-wrapper">
         <div className="left-content">
           <MinimalCarousel />
         </div>
         <div className="right-content">
-            <AboutUs
-              title="Qui Sommes-Nous"
-              text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-            />
-
+          <AboutUs
+            title="Qui Sommes-Nous"
+            text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+          />
         </div>
       </div>
       <section id="nos-equipe">

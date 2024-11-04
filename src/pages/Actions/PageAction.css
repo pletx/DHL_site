@@ -65,6 +65,7 @@ section{
   .action-card img,
   .tract-card img {
     width: 50%;
+    max-width: 500px;
   }
 
 }
