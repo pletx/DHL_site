@@ -13,15 +13,15 @@
 }
 
 .carousel-image {
-  
+  width: 100%;
   max-height: 400px; /* Hauteur maximale de l'image */
   object-fit: cover; /* Pour éviter la déformation de l'image */
 }
 
 .carousel-button {
-  position: relative;
+  position: absolute;
   transform: translateY(-50%); /* Ajuste le positionnement */
-  background: rgba(255, 255, 255, 0.7); /* Fond semi-transparent */
+  background: rgba(133, 133, 133, 0.7); /* Fond semi-transparent */
   border: none; /* Pas de bordure */
   border-radius: 5px; /* Coins arrondis */
   cursor: pointer; /* Curseur pointer */

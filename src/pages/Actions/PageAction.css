@@ -4,7 +4,7 @@
   gap: 20px;
   padding: 20px;
   box-sizing: border-box;
-  background: linear-gradient(to right, red, yellow);
+  background: linear-gradient(to right, rgb(255, 145, 0), yellow);
 }
 
 .nos-actions h2 {

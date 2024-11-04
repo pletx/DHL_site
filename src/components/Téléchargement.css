@@ -29,7 +29,9 @@
   border-radius: 5px;
   background-color: #f8f8f8;
   transition: background-color 0.3s ease, color 0.3s ease;
-  width: fit-content;
+  width: 100%;
+  overflow:hidden;
+  text-overflow: ellipsis;
 }
 
 .telechargement-link:hover {

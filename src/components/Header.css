@@ -219,7 +219,9 @@ button:hover {
   .nav-links a {
     padding: 8px 10px;
   }
-
+  .dropdown {
+    margin: 5px;
+  }
   .dropdown-content {
     position: relative;
     box-shadow: none;
@@ -229,7 +231,7 @@ button:hover {
   .dropdown:hover .dropdown-content {
     display: flex;
     margin-top: 10px;
-    flex-direction: column;
+    flex-direction: row;
     background-color: #ffdd6c;
   }
 }
