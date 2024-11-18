@@ -61,7 +61,7 @@ export const AuthProvider = ({ children }) => {
       if (!token) {
         throw new Error('No token found');
       }
-      const response = await fetch(`${ process.env.REACT_APP_API_URL}}/api/admin/auth/logout`, {
+      const response = await fetch(`${ process.env.REACT_APP_API_URL}/api/admin/auth/logout`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`, // Inclusion correcte du token dans les en-têtes
