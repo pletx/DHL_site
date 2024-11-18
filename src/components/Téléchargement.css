@@ -1,45 +1,134 @@
-.telechargement-container {
+/* Style principal pour le conteneur de la page */
+.pdf-container {
+  
+  font-family: 'Arial', sans-serif;
+  margin: 20px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Titre principal de la page */
+.pdf-title {
+  font-size: 24px;
+  color: #333;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+/* Style du formulaire pour ajouter un PDF */
+.form-container {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  padding: 20px;
-  
+  gap: 10px;
+  max-width: 400px;
+  margin: 0 auto;
+
 }
 
-.theme-section {
-  margin-bottom: 20px;
+.form-input-text,
+.form-input-file {
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+  margin: 5px 0;
 }
 
-.theme-title {
-  font-size: 1.5em;
-  color: #333;
+.form-button {
+  padding: 10px 15px;
+  font-size: 16px;
+  background-color: #5c6bc0;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+}
+
+.form-button:hover {
+  background-color: #3f4f9d;
+}
+
+/* Liste des PDFs */
+.pdf-list {
+  list-style-type: none;
+  padding: 0;
+  margin-top: 30px;
+}
+
+/* Item de la liste PDF */
+.pdf-item {
+  display: flex;
+  background-color: white;
+  margin-bottom: 15px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+
+  align-items: center;
+}
+
+.pdf-link {
+  color: #5c6bc0;
+  font-size: 16px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.pdf-link:hover {
+  color: #3f4f9d;
+}
+
+/* Boutons Supprimer et Télécharger */
+.pdf-button-delete {
+  padding: 8px 12px;
+  font-size: 14px;
+  background-color: #f44336;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  margin-left: 10px;
+  width: 10%;
+}
+
+.pdf-button-delete:hover {
+  background-color: #d32f2f;
+}
+
+.pdf-button-download {
+  padding: 8px 12px;
+  font-size: 14px;
+  background-color: #4caf50;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+ 
+}
+
+.pdf-button-download:hover {
+  background-color: #388e3c;
+}
+
+/* Affichage conditionnel pour les utilisateurs connectés */
+.form-container,
+.pdf-button-delete,
+.pdf-button-download {
+  display: block;
+ 
+}
+
+.form-input-text {
+  font-size: 16px;
   margin-bottom: 10px;
 }
 
-.theme-files {
-  display: flex;
-  gap: 8px;
+.form-input-file {
+  font-size: 16px;
 }
-
-.telechargement-link {
-  text-decoration: none;
-  color: #333;
-  padding: 8px 12px;
-  border: 1px solid #007bff;
-  border-radius: 5px;
-  background-color: #f8f8f8;
-  transition: background-color 0.3s ease, color 0.3s ease;
-  width: 100%;
-  overflow:hidden;
-  text-overflow: ellipsis;
-}
-
-.telechargement-link:hover {
-  text-decoration: underline;
-}
-@media (max-width: 1024px) {
-  .theme-files  {
-    justify-content: center;
-    flex-direction: column;
-    flex-wrap: wrap;
-  }}

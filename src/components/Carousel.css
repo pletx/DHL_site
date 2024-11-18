@@ -1,77 +1,77 @@
 .carousel-container {
   position: relative;
-  max-width: 100%; /* Limite la largeur maximale */
-  margin: auto; /* Centrage horizontal */
-  overflow: hidden; /* Cache le débordement des images */
+  max-width: 100%;
+  margin: auto;
+  overflow: hidden;
 }
 
 .carousel {
   display: flex;
-  justify-content: center; /* Centrer l'image */
-  align-items: center; /* Centrer verticalement */
-  transition: transform 0.5s ease; /* Animation de transition */
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.5s ease;
 }
 
 .carousel-image {
   width: 100%;
-  max-height: 400px; /* Hauteur maximale de l'image */
-  object-fit: cover; /* Pour éviter la déformation de l'image */
+  max-height: 400px;
+  object-fit: cover;
 }
 
 .carousel-button {
   position: absolute;
-  transform: translateY(-50%); /* Ajuste le positionnement */
-  background: rgba(133, 133, 133, 0.7); /* Fond semi-transparent */
-  border: none; /* Pas de bordure */
-  border-radius: 5px; /* Coins arrondis */
-  cursor: pointer; /* Curseur pointer */
-  padding: 10px; /* Espacement interne */
+  transform: translateY(-50%);
+  background: rgba(133, 133, 133, 0.7);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 10px;
   width: auto;
-  z-index: 10; /* S'assurer que les boutons sont au-dessus */
+  z-index: 10;
 }
 
 .carousel-button.left {
-  left: 10px; /* Positionnement à gauche */
-  top: 50%; /* Centrer verticalement */
+  left: 10px;
+  top: 50%;
 }
 
 .carousel-button.right {
-  right: 10px; /* Positionnement à droite */
-  top: 50%; /* Centrer verticalement */
+  right: 10px;
+  top: 50%;
 }
 
 .dropzone {
-  border: 2px dashed #007bff; /* Bordure en pointillés */
-  padding: 20px; /* Espacement interne */
-  text-align: center; /* Alignement du texte */
-  margin-top: 10px; /* Marge supérieure */
-  border-radius: 10px; /* Coins arrondis */
+  border: 2px dashed #007bff;
+  padding: 20px;
+  text-align: center;
+  margin-top: 10px;
+  border-radius: 10px;
 }
 
 .image-list {
-  display: flex; /* Flexbox pour le conteneur d'images */
-  flex-wrap: wrap; /* Permet à l'image de passer à la ligne suivante */
-  justify-content: center; /* Centrer les images */
-  margin-top: 20px; /* Marge supérieure */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 20px;
 }
 
 .image-item {
-  position: relative; /* Position relative pour le bouton de suppression */
-  margin: 10px; /* Espacement entre les images */
+  position: relative;
+  margin: 10px;
 }
 
 .uploaded-image {
-  width: 100px; /* Largeur de l'image téléchargée */
-  height: 100px; /* Hauteur de l'image téléchargée */
-  object-fit: cover; /* Pour éviter la déformation de l'image */
-  border-radius: 5px; /* Coins arrondis */
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 5px;
 }
 
 .image-item button {
-  position: absolute; /* Positionnement absolu pour le bouton de suppression */
-  top: 5px; /* Position du bouton en haut à gauche */
-  right: 5px; /* Position du bouton en haut à droite */
-  border: none; /* Pas de bordure */
-  cursor: pointer; /* Curseur pointer */
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  border: none;
+  cursor: pointer;
   width: auto;
 }

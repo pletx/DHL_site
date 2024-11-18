@@ -1,74 +1,40 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import './Header.css';
 import logoImage from '../assets/CGT transport.png';
 import bandeauImage from '../assets/Bandeau-cgt.png';
+import { AuthContext } from '../AuthContext';
 
 const Header = () => {
+  const { isLoggedIn, loading, login, logout } = useContext(AuthContext);
   const [showLogin, setShowLogin] = useState(false);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      setIsLoggedIn(true);
-    }
-  }, []);
-
-  const handleLogin = useCallback(async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     setError('');
-    setLoading(true);
 
     try {
-      const response = await fetch('http://localhost:5000/api/admin/auth/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ username, password }),
-        credentials: 'include'
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        localStorage.setItem('token', data.token);
-        setIsLoggedIn(true);
-        setShowLogin(false);
-        setUsername('');  // Réinitialiser le champ
-        setPassword('');  // Réinitialiser le champ
-        window.location.reload();  // Recharger la page après connexion
-      } else {
-        setError(data.message || 'Échec de la connexion');
-      }
+      await login(username, password);
+      setShowLogin(false);
+      setUsername('');
+      setPassword('');
+      window.location.reload(); // Rafraîchir la page pour mettre à jour l'état
     } catch (err) {
       setError('Une erreur est survenue. Veuillez réessayer.');
-    } finally {
-      setLoading(false);
     }
-  }, [username, password]);
+  };
 
-  const handleLogout = useCallback(async () => {
+  const handleLogout = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/admin/auth/logout', {
-        method: 'POST',
-        credentials: 'include'
-      });
-
-      if (response.ok) {
-        localStorage.removeItem('token');
-        setIsLoggedIn(false);
-        window.location.reload();  // Recharger la page après déconnexion
-      }
+      await logout();
     } catch (err) {
-      console.error('Déconnexion échouée :', err);
+      console.error('Erreur lors de la déconnexion:', err);
+      setError('Erreur lors de la déconnexion. Veuillez réessayer.');
     }
-  }, []);
+  };
 
   return (
     <header className="header">
@@ -83,7 +49,7 @@ const Header = () => {
           <div className="dropdown">
             <Link to="/" className="dropbtn">Home</Link>
             <div className="dropdown-content">
-              <Link to="/#nos-equipe">Nos Équipe</Link>
+              <Link to="/#nos-equipe">Notre Équipe</Link>
               <Link to="/#qui-sommes-nous">Qui Sommes-Nous</Link>
             </div>
           </div>
@@ -95,17 +61,17 @@ const Header = () => {
               <Link to="/actions#telechargement-section">Téléchargements</Link>
             </div>
           </div>
-          <Link to="/droits">Nos Droits</Link>
+          <Link to="/droits">Vos Droits</Link>
+          <Link to="/information">FAQ</Link>
           <Link to="/contact">Contact</Link>
         </nav>
         <div className="auth-buttons">
-          {isLoggedIn ? (
-            <button className="btn-signout" onClick={handleLogout}>Logout</button>
-          ) : (
-            <button className="btn-signin" onClick={() => setShowLogin(!showLogin)}>Login</button>
-          )}
+          <button onClick={isLoggedIn ? handleLogout : () => setShowLogin(true)}>
+            {isLoggedIn ? 'Déconnexion' : 'Connexion'}
+          </button>
         </div>
       </div>
+
       {showLogin && (
         <div className="modal-overlay" onClick={() => setShowLogin(false)}>
           <div className="login-modal" onClick={(e) => e.stopPropagation()}>

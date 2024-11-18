@@ -1,72 +1,134 @@
-.team {
+/* Container for the entire team section */
+.team-container {
   padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Title for the team section */
+h2 {
   text-align: center;
-}
-
-.team h2 {
-  font-size: 2em;
+  font-size: 2.5rem;
   margin-bottom: 20px;
+  color: #333;
 }
 
-.team-cards {
+/* Container for the list of team members */
+.team-list {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: row;
+
   justify-content: center;
   gap: 20px;
 }
 
-.admin-panel {
-  margin-top: 40px;
-}
-
-.add-teammate-form, .edit-teammate-form {
-  margin: 20px auto;
-  max-width: 400px;
-  text-align: left;
-}
-
-.add-teammate-form input, .edit-teammate-form input {
-  display: block;
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.add-teammate-form button, .edit-teammate-form button {
-  padding: 10px 20px;
-  background-color: #28a745;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  margin-right: 10px;
-}
-
-.add-teammate-form button:hover, .edit-teammate-form button:hover {
-  background-color: #218838;
-}
-
-.image-drop-zone {
-  border: 2px dashed #ccc;
-  border-radius: 4px;
+/* Individual team member card */
+.team-member {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
   padding: 20px;
   text-align: center;
-  margin-bottom: 10px;
-  transition: border-color 0.3s ease;
+  transition: transform 0.3s;
+  max-width: 300px;
+  min-width: 250px; /* Ensure minimum width */
+  flex: 1 1 300px; /* Flex-grow, flex-shrink, and base width */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.image-drop-zone p {
-  margin: 0;
-  font-size: 1em;
+.team-member img {
+  border-radius: 50%;
+  width: 100px; /* Ensure uniform size */
+  height: 100px; /* Ensure uniform size */
+  object-fit: cover; /* Maintain aspect ratio and cover the container */
+  margin-bottom: 15px;
+}
+
+.team-member h3 {
+  font-size: 1.5rem;
+  margin: 10px 0;
+  color: #555;
+}
+
+.team-member p {
+  font-size: 1.2rem;
   color: #777;
+  margin-bottom: 15px;
 }
 
-.image-drop-zone:hover {
-  border-color: #999;
+/* Action buttons for edit and delete */
+.team-member button {
+  background: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+  margin: 5px;
 }
 
-.image-drop-zone.dragover {
-  border-color: #28a745;
+.team-member button:hover {
+  background: #0056b3;
+}
+
+.team-member:hover {
+  transform: translateY(-5px);
+}
+
+/* Form container for adding/editing team members */
+.team-form {
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px 0;
+}
+
+.team-form h3 {
+  font-size: 2rem;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.team-form input[type="text"],
+.team-form input[type="file"] {
+  width: calc(100% - 20px);
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.team-form button {
+  background: #28a745;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.team-form button:hover {
+  background: #218838;
+}
+
+.team-form button.cancel {
+  background: #dc3545;
+}
+
+.team-form button.cancel:hover {
+  background: #c82333;
+}
+
+@media (max-width: 768px) {
+  .team-member {
+    max-width: 100%;
+  }
+
+  .team-list {
+    flex-direction: column;
+    align-items: center;
+  }
 }

@@ -1,0 +1,154 @@
+/* Style général pour la page QuestionsReponses */
+.questions-reponses-page {
+    background-color: #f4f4f4;
+    padding: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  /* Formulaire d'ajout de question-réponse */
+  .add-form {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+  }
+  
+  .add-form input,
+  .add-form textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    font-size: 1rem;
+    color: #333;
+  }
+  
+  .add-form input:focus,
+  .add-form textarea:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+  
+  .add-form button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .add-form button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Style de la liste des questions et réponses */
+  h1 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .question-reponse {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .question-reponse:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  .question-reponse .question {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+    transition: color 0.3s ease;
+  }
+  
+  .question-reponse .question:hover {
+    color: #007bff;
+  }
+  
+  .question-reponse .answer {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.5;
+    margin-top: 10px;
+  }
+  
+  .actions {
+    margin-top: 10px;
+    text-align: right;
+  }
+  
+  .actions button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    margin-right: 10px;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .actions button:hover {
+    background-color: #218838;
+  }
+  
+  .actions button:last-child {
+    background-color: #dc3545;
+  }
+  
+  .actions button:last-child:hover {
+    background-color: #c82333;
+  }
+  
+  /* Styles responsives */
+  @media (max-width: 768px) {
+    .questions-reponses-page {
+      padding: 15px;
+    }
+  
+    h1 {
+      font-size: 1.5rem;
+    }
+  
+    .add-form input,
+    .add-form textarea {
+      font-size: 0.95rem;
+    }
+  
+    .add-form button {
+      font-size: 0.95rem;
+    }
+  
+    .question-reponse .question {
+      font-size: 1rem;
+    }
+  
+    .question-reponse .answer {
+      font-size: 0.95rem;
+    }
+  
+    .actions button {
+      font-size: 0.95rem;
+    }
+  }
+  

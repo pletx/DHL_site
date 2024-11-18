@@ -1,7 +1,8 @@
 /* PageAction.css */
 
 .nos-actions {
-  gap: 20px;
+  display: flex;
+  flex-direction: column;
   padding: 20px;
   box-sizing: border-box;
   background: linear-gradient(to right, rgb(255, 145, 0), yellow);
@@ -10,31 +11,52 @@
 .nos-actions h2 {
   text-align: center;
   width: 100%;
+  margin-bottom: 20px;
+  font-size: 2em;
+  color: #333;
 }
-section{
+
+section {
   margin: 20px;
   padding: 20px;
+  background: rgba(253, 253, 253, 0.8);
+  border-radius: 15px;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
+section:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
+}
+
 #courrier-section {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  background: rgba(253, 253, 253, 0.8);
-  border-radius: 15px;
 }
 
+.action-card, .tract-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin: 10px 0;
+}
 
-
-.action-card img,
-.tract-card img {
-  height: 30%;
-  border-radius: 10px;
+.action-card img, .tract-card img {
+  width: 50%;
+  border-bottom: 1px solid #ddd;
 }
 
 .download-item {
-  margin: 10px 0;
-  width: 30%;
+  width: 100%;
+  text-align: center;
 }
 
 .download-link {
@@ -45,6 +67,8 @@ section{
   border-radius: 5px;
   text-decoration: none;
   display: inline-block;
+  margin: 10px 0;
+  transition: background-color 0.3s ease;
 }
 
 .download-link:hover {
@@ -55,27 +79,36 @@ section{
   .nos-actions {
     grid-template-columns: repeat(2, 1fr);
   }
-  .action-card,
-  .tract-card {
-    flex-direction: row;
-    text-align: left;
+
+  .action-card, .tract-card {
+
+    align-items: center;
   }
 
-  .action-card img,
-  .tract-card img {
+  .action-card img{
     width: 50%;
-    max-width: 500px;
+    max-width: 550px;
+    border-bottom: none;
+    border-right: 1px solid #ddd;
   }
-
 }
 
 @media (max-width: 768px) {
-  section{
-    margin: 0px;
-    padding: 0px;
-  }
-  .nos-actions {
-    grid-template-columns: repeat(3, 1fr);
+  section {
+    margin: 0;
+    padding: 10px;
   }
 
+  .nos-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .action-card, .tract-card {
+    flex-direction: column;
+  }
+
+  .action-card img, .tract-card img {
+    width: 100%;
+    border-right: none;
+  }
 }

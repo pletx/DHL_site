@@ -1,64 +1,133 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useLocation } from 'react-router-dom';
+import axios from 'axios';
 import ActionCard from '../../components/ActionCard';
-import TractCard from '../../components/TractCard'; // Assuming TractCard is already created similarly
-import Téléchargement from '../../components/Téléchargement'; // Importing the Téléchargement component
+import TractCard from '../../components/TractCard';
+import Téléchargement from '../../components/Téléchargement';
 import './PageAction.css';
 import image1 from "../../assets/202407_Syndicalisation_Slide5.jpg";
 import image2 from "../../assets/202407_Syndicalisation_Slide1.jpg";
+import { AuthContext } from '../../AuthContext';  // Assurez-vous que le chemin du contexte est correct
 
-const actions = [
+// Placeholder pour initialiser les actions si nécessaire
+const initialActions = [
   {
     title: "Action 1",
-    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    image: image1
+    text: "Lorem ipsum dolor sit amet...",
+    image: image1,
   },
-  {
-    title: "Action 2",
-    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    image: image2
-  },
-  {
-    title: "Action 3",
-    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    image: image1
-  },
-  {
-    title: "Action 4",
-    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    image: image2
-  },
-  // Ajoutez d'autres actions ici
+  // Ajoutez d'autres actions si besoin
 ];
 
-const tracts = [
+// Placeholder pour initialiser les tracts
+const initialTracts = [
   {
     title: "Tract 1",
-    image: image1,
-    pdfLink: "url_du_pdf_1.pdf"
+    imageUrl: image1,
+    pdfUrl: "url_du_pdf_1.pdf"
   },
-  {
-    title: "Tract 2",
-    image: image2,
-    pdfLink: "url_du_pdf_2.pdf"
-  },
-  // Ajoutez d'autres tracts ici
-];
-
-const downloads = [
-  {
-    title: "Document 1",
-    pdfLink: "url_du_pdf_1.pdf"
-  },
-  {
-    title: "Document 2",
-    pdfLink: "url_du_pdf_2.pdf"
-  },
-  // Ajoutez d'autres documents ici
+  // Ajoutez d'autres tracts si besoin
 ];
 
 const NosActions = () => {
+  const { isLoggedIn } = useContext(AuthContext);  // Récupère l'état de connexion
+  const [actions, setActions] = useState(initialActions);
+  const [tracts, setTracts] = useState(initialTracts);
+  const [newAction, setNewAction] = useState({ title: '', text: '', image: null });
+  const [newTract, setNewTract] = useState({ title: '', image: null, pdf: null });
+  const [editingAction, setEditingAction] = useState(null); // Pour gérer l'édition des actions
   const location = useLocation();
+
+  useEffect(() => {
+    const fetchActions = async () => {
+      try {
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/actions`);
+        setActions(response.data);
+      } catch (error) {
+        console.error('Erreur lors de la récupération des actions:', error);
+      }
+    };
+
+    const fetchTracts = async () => {
+      try {
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/tracts`);
+        setTracts(response.data);
+      } catch (error) {
+        console.error('Erreur lors de la récupération des tracts:', error);
+      }
+    };
+
+    fetchActions();
+    fetchTracts();
+  }, []);
+
+  const handleSubmitAction = async (event) => {
+    event.preventDefault();
+    const formData = new FormData();
+    formData.append('title', newAction.title);
+    formData.append('text', newAction.text);
+    if (newAction.image) {
+      formData.append('image', newAction.image);
+    }
+
+    try {
+      const response = editingAction
+        ? await axios.put(`${process.env.REACT_APP_API_URL}/api/actions/${editingAction._id}`, formData)
+        : await axios.post(`${process.env.REACT_APP_API_URL}/api/actions`, formData);
+      if (response.data) {
+        setActions(prevActions => [...prevActions, response.data]);
+        setNewAction({ title: '', text: '', image: null });
+        setEditingAction(null);
+      }
+    } catch (error) {
+      console.error('Erreur lors de l\'ajout ou modification de l\'action:', error);
+    }
+  };
+
+  const handleSubmitTract = async (event) => {
+    event.preventDefault();
+    const formData = new FormData();
+    formData.append('title', newTract.title);
+    if (newTract.image) {
+      formData.append('image', newTract.image);
+    }
+    if (newTract.pdf) {
+      formData.append('pdf', newTract.pdf);
+    }
+
+    try {
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/tracts`, formData);
+      if (response.data) {
+        setTracts(prevTracts => [...prevTracts, response.data]);
+        setNewTract({ title: '', image: null, pdf: null });
+      }
+    } catch (error) {
+      console.error('Erreur lors de l\'ajout du tract:', error);
+    }
+  };
+
+  const handleDeleteAction = async (id) => {
+    try {
+      await axios.delete(`${process.env.REACT_APP_API_URL}/api/actions/${id}`);
+      setActions(actions.filter(action => action._id !== id));
+    } catch (error) {
+      console.error('Erreur lors de la suppression de l\'action:', error);
+    }
+  };
+
+  const handleDeleteTract = async (id) => {
+    try {
+      await axios.delete(`${process.env.REACT_APP_API_URL}/api/tracts/${id}`);
+      setTracts(tracts.filter(tract => tract._id !== id));
+    } catch (error) {
+      console.error('Erreur lors de la suppression du tract:', error);
+    }
+  };
+
+  const handleEditAction = (action) => {
+    setNewAction({ title: action.title, text: action.text, image: null });
+    setEditingAction(action);
+  };
 
   useEffect(() => {
     const handleHashChange = () => {
@@ -70,33 +139,54 @@ const NosActions = () => {
         }
       }
     };
-    handleHashChange(); // To handle the initial load or hash changes
+    handleHashChange();
   }, [location]);
 
   return (
     <div className="nos-actions">
       <section id="courrier-section">
         <h2>Courriers</h2>
-        {actions.map((action, index) => (
-          <ActionCard 
-            key={index}
-            title={action.title}
-            text={action.text}
-            image={action.image}
+        {actions.map((action) => (
+          <ActionCard
+            key={action._id}
+            action={action}
+            onDelete={handleDeleteAction}
+            onEdit={handleEditAction}
           />
         ))}
       </section>
+
       <section id="tract-section">
         <h2>Tracts</h2>
-        {tracts.map((tract, index) => (
-          <TractCard 
-            key={index}
-            title={tract.title}
-            image={tract.image}
-            pdfLink={tract.pdfLink}
+        {tracts.map((tract) => (
+          <TractCard
+            key={tract._id}
+            tract={tract}
+            onDelete={handleDeleteTract}
+            onEdit={handleEditAction}
           />
         ))}
+
+        {/* Affichage du formulaire seulement si l'utilisateur est connecté */}
+        {isLoggedIn && (
+          <form onSubmit={handleSubmitTract}>
+            <h3>Ajouter un tract</h3>
+            <input
+              type="text"
+              placeholder="Titre"
+              value={newTract.title}
+              onChange={(e) => setNewTract({ ...newTract, title: e.target.value })}
+            />
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(e) => setNewTract({ ...newTract, image: e.target.files[0] })}
+            />
+            <button type="submit">Ajouter</button>
+          </form>
+        )}
       </section>
+
       <section id="telechargement-section">
         <h2>Téléchargements</h2>
         <Téléchargement />

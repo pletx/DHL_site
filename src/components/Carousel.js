@@ -1,146 +1,129 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import './Carousel.css';
-import { useDropzone } from 'react-dropzone';
-import { FaArrowLeft, FaArrowRight, FaTrash } from 'react-icons/fa';
+import React, { useState, useEffect, useContext } from 'react';
+import { AuthContext } from '../AuthContext';
 import axios from 'axios';
-import Slide1 from "../assets/202407_Syndicalisation_Slide1.jpg";
-import Slide2 from "../assets/202407_Syndicalisation_Slide2.jpg";
-import Slide3 from "../assets/202407_Syndicalisation_Slide3.jpg";
-import Slide4 from "../assets/202407_Syndicalisation_Slide4.jpg";
-import Slide5 from "../assets/202407_Syndicalisation_Slide5.jpg";
-import Slide6 from "../assets/202407_Syndicalisation_Slide6.jpg";
-import Slide7 from "../assets/202407_Syndicalisation_Slide7.jpg";
-import Slide8 from "../assets/202407_Syndicalisation_Slide8.jpg";
-import Slide9 from "../assets/202407_Syndicalisation_Slide9.jpg";
+import './Carousel.css';
+const Carousel = () => {
+  const { isLoggedIn } = useContext(AuthContext);
+  const [images, setImages] = useState([]);        // Liste des images du carousel
+  const [currentIndex, setCurrentIndex] = useState(0); // Index de l'image actuelle
+  const [file, setFile] = useState(null);            // Fichier à uploader
+  const [loading, setLoading] = useState(false);     // Chargement d'upload
+  const [res, setRes] = useState(null);              // Réponse de l'upload
 
-const staticImages = [
-    Slide1,
-    Slide2,
-    Slide3,
-    Slide4,
-    Slide5,
-    Slide6,
-    Slide7,
-    Slide8,
-    Slide9,
-];
-
-const MinimalCarousel = () => {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [images, setImages] = useState(staticImages);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [imageUrl, setImageUrl] = useState('');
-
+  // Charger les images depuis le backend
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      setIsLoggedIn(true);
-    }
+    const fetchImages = async () => {
+      try {
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/admin/images`);
+        setImages(response.data);
+        console.error(response.data);
+      } catch (error) {
+        console.error('Failed to fetch images:', error);
+      }
+    };
+
     fetchImages();
   }, []);
 
-  const fetchImages = async () => {
-    try {
-      const response = await axios.get('http://localhost:5000/api/carousel-images');
-      const backendImages = response.data.map(img => img.url);
-      setImages([...staticImages, ...backendImages]);
-    } catch (error) {
-      console.error('Erreur lors de la récupération des images', error);
-    }
+  // Gérer la sélection d'un fichier
+  const handleFileChange = (event) => {
+    setFile(event.target.files[0]);
   };
 
-  const previousSlide = () => {
-    const newIndex = (currentImageIndex === 0) ? images.length - 1 : currentImageIndex - 1;
-    setCurrentImageIndex(newIndex);
-  };
-
-  const nextSlide = () => {
-    const newIndex = (currentImageIndex === images.length - 1) ? 0 : currentImageIndex + 1;
-    setCurrentImageIndex(newIndex);
-  };
-
-  useEffect(() => {
-    const interval = setInterval(nextSlide, 5000);
-    return () => clearInterval(interval);
-  }, [currentImageIndex]);
-
-  const handleAddImage = async (file) => {
-    const formData = new FormData();
-    formData.append('image', file);
-
-    try {
-      const response = await axios.post('http://localhost:5000/api/carousel-images', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-          Authorization: `Bearer ${localStorage.getItem('token')}`
-        }
-      });
-      setImages([...images, response.data.url]);
-    } catch (error) {
-      console.error('Erreur lors de l\'ajout de l\'image', error);
-    }
-  };
-
-  const handleDeleteImage = async (index) => {
-    const image = images[index];
-    const staticImageIndex = staticImages.indexOf(image);
-    if (staticImageIndex !== -1) {
-      alert('Impossible de supprimer les images par défaut.');
+  // Gérer l'upload de l'image
+  const handleUpload = async () => {
+    if (!file) {
+      alert('Please select a file to upload');
       return;
     }
-
+  
     try {
-      const response = await axios.get('http://localhost:5000/api/carousel-images');
-      const imageToDelete = response.data[index]._id;
-
-      await axios.delete(`http://localhost:5000/api/carousel-images/${imageToDelete}`, {
+      setLoading(true); // Activer le chargement
+      const data = new FormData();
+      data.append("file", file); // Ajouter le fichier au FormData
+  
+      // Envoi de la requête d'upload
+      const res = await axios.post(`${process.env.REACT_APP_API_URL}/api/admin/upload-image`, data, {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`
-        }
+          'Content-Type': 'multipart/form-data',
+        },
       });
-
-      const newImages = images.filter((_, idx) => idx !== index);
-      setImages(newImages);
+  
+      // Ajouter l'image uploadée à la liste des images
+      setImages((prevImages) => [...prevImages, res.data]);
+      setRes(res.data); // Stocker la réponse de l'upload
     } catch (error) {
-      console.error('Erreur lors de la suppression de l\'image', error);
+      alert(error.message);
+    } finally {
+      setLoading(false); // Désactiver le chargement
+    }
+  };
+  
+
+  // Gérer la suppression d'une image
+  const deleteImage = async (imageUrl) => {
+    try {
+      await axios.delete(`${process.env.REACT_APP_API_URL}/api/admin/delete-image`, { data: { imageUrl } });
+      setImages((prevImages) => prevImages.filter(image => image.url !== imageUrl));
+    } catch (error) {
+      console.error('Failed to delete image:', error.response ? error.response.data : error.message);
     }
   };
 
-  const onDrop = useCallback((acceptedFiles) => {
-    acceptedFiles.forEach(file => {
-      handleAddImage(file);
-    });
-  }, []);
+  // Gérer l'image précédente
+  const handlePrev = () => {
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
+  };
 
-  const { getRootProps, getInputProps } = useDropzone({ onDrop });
+  // Gérer l'image suivante
+  const handleNext = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+  };
 
   return (
     <div className="carousel-container">
       <div className="carousel">
-        <img src={images[currentImageIndex]} alt="Carousel" className="carousel-image" />
-        <button className="carousel-button left" onClick={previousSlide}><FaArrowLeft /></button>
-        <button className="carousel-button right" onClick={nextSlide}><FaArrowRight /></button>
+        {images.length > 0 && (
+          <img
+            className="carousel-image"
+            src={images[currentIndex].url}
+            alt="carousel"
+          />
+        )}
+        <button className="carousel-button left" onClick={handlePrev}>
+          &#9664;
+        </button>
+        <button className="carousel-button right" onClick={handleNext}>
+          &#9654;
+        </button>
       </div>
 
       {isLoggedIn && (
-        <div {...getRootProps()} className="dropzone">
-          <input {...getInputProps()} />
-          <p>Déposez des fichiers d'images ici ou cliquez pour télécharger</p>
-        </div>
-      )}
+        <div>
+          <input type="file" onChange={handleFileChange} />
+          <button onClick={handleUpload} disabled={loading}>
+            {loading ? 'Uploading...' : 'Upload'}
+          </button>
 
-      {isLoggedIn && (
-        <div className="image-list">
-          {images.map((image, index) => (
-            <div key={index} className="image-item">
-              <img src={image} alt={`Uploaded ${index}`} className="uploaded-image" />
-              <button onClick={() => handleDeleteImage(index)}><FaTrash /></button>
+          {res && (
+            <div>
+              <h3>Uploaded Image:</h3>
+              <img src={res.url} alt="Uploaded" style={{ width: '200px', height: 'auto' }} />
             </div>
-          ))}
+          )}
+
+          <div className="image-list">
+            {images.map((image) => (
+              <div className="image-item" key={image.url}>
+                <img src={image.url} alt="uploaded" className="uploaded-image" />
+                <button onClick={() => deleteImage(image.url)}>Delete</button>
+              </div>
+            ))}
+          </div>
         </div>
       )}
     </div>
   );
 };
 
-export default MinimalCarousel;
+export default Carousel;

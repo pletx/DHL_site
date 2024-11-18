@@ -1,0 +1,132 @@
+/* Style de base pour le conteneur de la question-réponse */
+.question-reponse {
+    background-color: #f9f9f9;
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .question-reponse:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Style pour la question */
+  .question {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+    transition: color 0.3s ease;
+  }
+  
+  .question:hover {
+    color: #0056b3;
+  }
+  
+  /* Style de la réponse */
+  .answer {
+    font-size: 1rem;
+    margin-top: 10px;
+    color: #555;
+    line-height: 1.5;
+  }
+  
+  /* Formulaire d'édition */
+  .edit-form {
+    margin-top: 15px;
+  }
+  
+  .edit-form input,
+  .edit-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+  }
+  
+  .edit-form input:focus,
+  .edit-form textarea:focus {
+    border-color: #0056b3;
+    outline: none;
+  }
+  
+  .edit-form button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .edit-form button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Style des boutons Modifier et Supprimer */
+  .actions {
+    margin-top: 10px;
+  }
+  
+  .actions button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    margin-right: 10px;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .actions button:hover {
+    background-color: #218838;
+  }
+  
+  .actions button:last-child {
+    background-color: #dc3545;
+  }
+  
+  .actions button:last-child:hover {
+    background-color: #c82333;
+  }
+  
+  /* Style responsive */
+  @media (max-width: 768px) {
+    .question-reponse {
+      padding: 15px;
+    }
+  
+    .question {
+      font-size: 1rem;
+    }
+  
+    .answer {
+      font-size: 0.95rem;
+    }
+  
+    .edit-form input,
+    .edit-form textarea {
+      font-size: 0.95rem;
+    }
+  
+    .edit-form button {
+      font-size: 0.95rem;
+    }
+  
+    .actions button {
+      font-size: 0.95rem;
+    }
+  }
+  

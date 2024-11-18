@@ -1,62 +1,99 @@
-// Téléchargement.js
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import './Téléchargement.css';
-
-const fichiersParTheme = {
-  "Accords et Négociations": [
-    "Accord signé CSEC CSEE Dialogue Social 2024.pdf",
-    "Négociation accord d.docx R1 Mai 2024.pdf",
-    "R2 Accord Nego interessement (1).pdf",
-  ],
-  "Communications CGT": [
-    "Communication_CGT_congés_payés_24_avril_2024.pdf",
-    "COM CGT PSE LYON (1).pdf",
-    "Communication CGT Elections 2024 (1).pdf",
-    "Communication CGT PSE LYS GTW du 15 07 2024.pdf",
-  ],
-  "Fiches Techniques Temps de Travail": [
-    "Dhl-FT-01-TempsTravailRegimeStandart-MAJ-22juin06.pdf",
-    "Dhl-FT-02-TempsTravail-CS.pdf",
-    "Dhl-FT-04-Cycles.pdf",
-    "Dhl-FT-06-TempsTravail-4ou4_5-Jours.pdf",
-    "Dhl-FT-31-TempsTravail-Roulants.pdf",
-  ],
-  "Primes et Indemnités": [
-    "Dhl-FT-12-PrimeReactivite.pdf",
-    "Dhl-FT-18-CongesPayes.pdf",
-    "Dhl-FT-19-CongeAnciennete.pdf",
-    "Dhl-FT-38-PrimePresence.pdf",
-    "Dhl-FT-39-PrimePerformanceNonCadre.pdf",
-  ],
-  "Congés et Événements": [
-    "Dhl-FT-23-CongesEvenementsFamiliaux.pdf",
-    "Dhl-FT-25-JoursPonts.pdf",
-    "Dhl-FT-26-Rachat-Jours-RTT.pdf",
-  ],
-};
-
 const Téléchargement = () => {
+  const [pdfs, setPdfs] = useState([]);
+  const [newPdf, setNewPdf] = useState({ title: '', file: null });
+  const [isLoggedIn, setIsLoggedIn] = useState(false);  // État de la connexion de l'utilisateur
+  const apiUrl = process.env.REACT_APP_API_URL;
+  useEffect(() => {
+    // Vérifiez si l'utilisateur est connecté, par exemple avec un token dans le localStorage
+    const token = localStorage.getItem('token');  // Exemple d'utilisation du localStorage
+    if (token) {
+      setIsLoggedIn(true);  // Si le token existe, on considère que l'utilisateur est connecté
+    }
+
+    const fetchPdfs = async () => {
+      try {
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/pdfs`);
+        setPdfs(response.data);
+      } catch (error) {
+        console.error('Erreur lors de la récupération des PDFs:', error);
+      }
+    };
+    fetchPdfs();
+  }, []);
+
+  const handleAddPdf = async (event) => {
+    event.preventDefault();
+    const formData = new FormData();
+    formData.append('title', newPdf.title);
+    formData.append('pdf', newPdf.file);
+
+    try {
+      const response = await axios.post(`${apiUrl}/api/pdfs`, formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      });
+      setPdfs([...pdfs, response.data]);
+      setNewPdf({ title: '', file: null });
+    } catch (error) {
+      console.error('Erreur lors de l\'ajout du PDF:', error);
+    }
+  };
+
+  const handleDeletePdf = async (id) => {
+    try {
+      await axios.delete(`${apiUrl}/api/pdfs/${id}`);
+      setPdfs(pdfs.filter(pdf => pdf._id !== id));
+    } catch (error) {
+      console.error('Erreur lors de la suppression du PDF:', error);
+    }
+  };
+
+  const getDownloadLink = (pdfUrl) => {
+    return `${pdfUrl.replace('/upload/', '/upload/fl_attachment/')}`;
+  };
+
   return (
-    <div className="telechargement-container">
-      {Object.keys(fichiersParTheme).map((theme, index) => (
-        <div key={index} className="theme-section">
-          <h3 className="theme-title">{theme}</h3>
-          <div className="theme-files">
-            {fichiersParTheme[theme].map((fichier, fileIndex) => (
-              <a
-                key={fileIndex}
-                href={`${process.env.PUBLIC_URL}/download/${fichier}`}
-                download
-                className="telechargement-link"
-              >
-                Télécharger {fichier}
-              </a>
-            ))}
-          </div>
-        </div>
-      ))}
-    </div>
-  );
+    <div className="pdf-container">
+  <h2 className="pdf-title">Gérer les PDFs</h2>
+  
+  {isLoggedIn && (
+    <form className="form-container" onSubmit={handleAddPdf}>
+      <input
+        type="text"
+        className="form-input-text"
+        placeholder="Titre du PDF"
+        value={newPdf.title}
+        onChange={(e) => setNewPdf({ ...newPdf, title: e.target.value })}
+      />
+      <input
+        type="file"
+        className="form-input-file"
+        accept=".pdf"
+        onChange={(e) => setNewPdf({ ...newPdf, file: e.target.files[0] })}
+      />
+      <button className="form-button" type="submit">Ajouter</button>
+    </form>
+  )}
+
+  <ul className="pdf-list">
+    {pdfs.map(pdf => (
+      <li key={pdf._id} className="pdf-item">
+        <a href={getDownloadLink(pdf.pdfUrl)} className="pdf-link" target="_blank" rel="noopener noreferrer">
+          {pdf.title}
+        </a>
+        {isLoggedIn && (
+          <>
+            <button className="pdf-button-delete" onClick={() => handleDeletePdf(pdf._id)}>Supprimer</button>
+            <button className="pdf-button-download" onClick={() => window.open(getDownloadLink(pdf.pdfUrl), '_blank')}>Télécharger</button>
+          </>
+        )}
+      </li>
+    ))}
+  </ul>
+</div>
+  )
 };
 
 export default Téléchargement;
