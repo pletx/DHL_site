@@ -9,6 +9,8 @@
   
   /* Formulaire d'ajout de question-réponse */
   .add-form {
+    display: flex;
+    flex-direction: column;
     background-color: #ffffff;
     border-radius: 8px;
     padding: 20px;
@@ -18,7 +20,7 @@
   
   .add-form input,
   .add-form textarea {
-    width: 100%;
+   min-height: 50px;
     padding: 12px;
     margin-bottom: 20px;
     border-radius: 5px;
@@ -71,7 +73,7 @@
   }
   
   .question-reponse .question {
-    font-size: 1.2rem;
+    font-size: 2rem;
     font-weight: bold;
     color: #333;
     cursor: pointer;
@@ -85,8 +87,10 @@
   }
   
   .question-reponse .answer {
-    font-size: 1rem;
+    font-size: 1.5rem;
     color: #555;
+    
+    border-top:solid #333;
     line-height: 1.5;
     margin-top: 10px;
   }

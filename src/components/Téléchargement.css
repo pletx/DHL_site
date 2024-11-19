@@ -58,6 +58,8 @@
   list-style-type: none;
   padding: 0;
   margin-top: 30px;
+  
+  overflow-wrap: break-word;
 }
 
 /* Item de la liste PDF */
@@ -68,8 +70,10 @@
   padding: 15px;
   border: 1px solid #ddd;
   border-radius: 6px;
-
+  flex-wrap: wrap;
   align-items: center;
+  overflow-wrap: anywhere;
+  font-size: x-large;
 }
 
 .pdf-link {
@@ -94,7 +98,7 @@
   color: white;
   cursor: pointer;
   margin-left: 10px;
-  width: 10%;
+
 }
 
 .pdf-button-delete:hover {

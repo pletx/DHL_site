@@ -80,13 +80,13 @@ const Téléchargement = () => {
   <ul className="pdf-list">
     {pdfs.map(pdf => (
       <li key={pdf._id} className="pdf-item">
-        <a href={getDownloadLink(pdf.pdfUrl)} className="pdf-link" target="_blank" rel="noopener noreferrer">
+        <p>
           {pdf.title}
-        </a>
+        </p>
+        <button className="pdf-button-download" onClick={() => window.open(getDownloadLink(pdf.pdfUrl), '_blank')}>Télécharger</button>
         {isLoggedIn && (
           <>
             <button className="pdf-button-delete" onClick={() => handleDeletePdf(pdf._id)}>Supprimer</button>
-            <button className="pdf-button-download" onClick={() => window.open(getDownloadLink(pdf.pdfUrl), '_blank')}>Télécharger</button>
           </>
         )}
       </li>

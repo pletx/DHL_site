@@ -1,15 +1,11 @@
 .droit-card {
   display: flex;
-  align-items: center;
-  justify-content: center;
   padding: 10px;
   border-radius: 15px;
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
   background: rgba(253, 253, 253, 0.8);
   margin: 20px auto;
-  width: 100%;
-  max-width: 90vw;
-  height: 60vh;
+
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   flex-wrap: wrap;
   overflow: hidden;
@@ -22,7 +18,7 @@
 }
 
 .text-content {
-  flex: 1;
+  
   padding: 20px;
   box-sizing: border-box;
   max-height: 100%;
@@ -55,7 +51,7 @@
 }
 
 .image-content img {
-  width: 50%;
+  width: 100%;
   height: auto;
   max-height: 100%;
   object-fit: contain;
@@ -78,7 +74,7 @@
   background-color: #f9f9f9;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 100%;
+  width: 80%;
   max-width: 600px;
   margin: 20px auto;
 }
