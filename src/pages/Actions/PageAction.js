@@ -144,18 +144,11 @@ const NosActions = () => {
 
   return (
     <div className="nos-actions">
-      <section id="courrier-section">
+      <h2>Nos Actions</h2>
+      <section id="telechargement-section">
         <h2>Courriers</h2>
-        {actions.map((action) => (
-          <ActionCard
-            key={action._id}
-            action={action}
-            onDelete={handleDeleteAction}
-            onEdit={handleEditAction}
-          />
-        ))}
+        <Téléchargement />
       </section>
-
       <section id="tract-section">
         <h2>Tracts</h2>
         {tracts.map((tract) => (
@@ -186,11 +179,21 @@ const NosActions = () => {
           </form>
         )}
       </section>
-
-      <section id="telechargement-section">
-        <h2>Téléchargements</h2>
-        <Téléchargement />
+      <section id="courrier-section">
+        <h2>Photo</h2>
+        {actions.map((action) => (
+          <ActionCard
+            key={action._id}
+            action={action}
+            onDelete={handleDeleteAction}
+            onEdit={handleEditAction}
+          />
+        ))}
       </section>
+
+      
+
+      
     </div>
   );
 };
