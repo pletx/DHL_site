@@ -56,7 +56,6 @@ const Téléchargement = () => {
 
   return (
     <div className="pdf-container">
-  <h2 className="pdf-title">Gérer les PDFs</h2>
   
   {isLoggedIn && (
     <form className="form-container" onSubmit={handleAddPdf}>
