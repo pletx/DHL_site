@@ -103,7 +103,6 @@ const ActionCards = () => {
 
   return (
     <div className="action-container">
-      <h2>Nos Actions</h2>
       <div className="action-list">
         {actionCards.map((card) => (
           <div
