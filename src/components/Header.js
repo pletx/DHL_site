@@ -58,7 +58,7 @@ const Header = () => {
             <div className="dropdown-content">
               <Link to="/actions#courrier-section">Courriers</Link>
               <Link to="/actions#tract-section">Tracts</Link>
-              <Link to="/actions#telechargement-section">Téléchargements</Link>
+              <Link to="/actions#telechargement-section">Photo</Link>
             </div>
           </div>
           <Link to="/droits">Vos Droits</Link>
