@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.27b08723.css",
-    "main.js": "/static/js/main.f659d83d.js",
+    "main.js": "/static/js/main.638c0a76.js",
     "static/js/453.69b1c731.chunk.js": "/static/js/453.69b1c731.chunk.js",
     "static/media/Bandeau-cgt.png": "/static/media/Bandeau-cgt.f1ab52886d709763c5ae.png",
     "static/media/202407_Syndicalisation_Slide1.jpg": "/static/media/202407_Syndicalisation_Slide1.a0c20c7bdc7a8b0918c1.jpg",
@@ -9,11 +9,11 @@
     "static/media/CGT transport.png": "/static/media/CGT transport.3fa524beae51b295fe42.png",
     "index.html": "/index.html",
     "main.27b08723.css.map": "/static/css/main.27b08723.css.map",
-    "main.f659d83d.js.map": "/static/js/main.f659d83d.js.map",
+    "main.638c0a76.js.map": "/static/js/main.638c0a76.js.map",
     "453.69b1c731.chunk.js.map": "/static/js/453.69b1c731.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.27b08723.css",
-    "static/js/main.f659d83d.js"
+    "static/js/main.638c0a76.js"
   ]
 }

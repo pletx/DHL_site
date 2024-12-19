@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../AuthContext';
 import axios from 'axios';
 import './Carousel.css';
+
 const Carousel = () => {
   const { isLoggedIn } = useContext(AuthContext);
   const [images, setImages] = useState([]);        // Liste des images du carousel
@@ -16,7 +17,6 @@ const Carousel = () => {
       try {
         const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/admin/images`);
         setImages(response.data);
-        console.error(response.data);
       } catch (error) {
         console.error('Failed to fetch images:', error);
       }
@@ -24,6 +24,15 @@ const Carousel = () => {
 
     fetchImages();
   }, []);
+
+  // Ajouter le défilement automatique
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+    }, 3000); // Changer d'image toutes les 3 secondes
+
+    return () => clearInterval(interval);
+  }, [images.length]);
 
   // Gérer la sélection d'un fichier
   const handleFileChange = (event) => {
