@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import emailjs from 'emailjs-com';
 import './ContactForm.css';
 
 const ContactForm = () => {
@@ -16,18 +15,10 @@ const ContactForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    emailjs.sendForm(
-      'YOUR_SERVICE_ID',
-      'YOUR_TEMPLATE_ID',
-      e.target,
-      'YOUR_USER_ID'
-    )
-    .then((result) => {
-      alert('Message sent successfully');
-    }, (error) => {
-      alert('Failed to send message, please try again');
-    });
+    const mailtoLink = `mailto:eddytougon@gmail.com?subject=${encodeURIComponent('Contact Form Submission')}&body=${encodeURIComponent(
+      `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
+    )}`;
+    window.location.href = mailtoLink;
 
     setFormData({
       name: '',

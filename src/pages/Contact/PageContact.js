@@ -9,11 +9,11 @@ const Contact = () => {
       <ContactForm />
       <div className="social-links">
         <h3>Suivez-nous</h3>
-        <a href="https://www.facebook.com/yourpage" target="_blank" rel="noopener noreferrer" className="social-link">
+        <a href="https://www.facebook.com/CgtDhlExpressIntl" target="_blank" rel="noopener noreferrer" className="social-link">
           <FaFacebook />
           Facebook
         </a>
-        <a href="https://wa.me/yourwhatsappnumber" target="_blank" rel="noopener noreferrer" className="social-link">
+        <a href="https://chat.whatsapp.com/Bpp6yRJDqyL0ENFxmC23iq" target="_blank" rel="noopener noreferrer" className="social-link">
           <FaWhatsapp />
           WhatsApp
         </a>

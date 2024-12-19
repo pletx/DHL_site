@@ -38,7 +38,11 @@ const HomePage = () => {
         <div className="right-content">
           <AboutUs
             title="Qui Sommes-Nous"
-            text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+            text=" Le syndicat des salariés CGT-DHL Express International a été créé en 1998, notre objectif est de défendre vos droits, améliorer vos conditions de travail et garantir une meilleure qualité de vie professionnelle pour tous.
+La CGT, forte de son histoire et de ses valeurs, s'engage à être à vos côtés pour porter vos revendications et trouver des solutions aux problèmes que vous rencontrez. Nous croyons en la solidarité, la justice sociale et l'égalité des chances pour tous les salariés.
+Nous vous invitons à nous rejoindre et à participer activement à la vie syndicale. Ensemble, nous pouvons faire entendre notre voix et obtenir des avancées significatives pour tous les travailleurs de notre entreprise.
+N'hésitez pas à nous contacter pour toute question ou pour adhérer à notre syndicat. Votre soutien est essentiel pour construire un avenir meilleur.
+Fraternellement."
           />
         </div>
       </div>
