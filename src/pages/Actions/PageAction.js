@@ -21,11 +21,7 @@ const initialActions = [
 
 // Placeholder pour initialiser les tracts
 const initialTracts = [
-  {
-    title: "Tract 1",
-    imageUrl: image1,
-    pdfUrl: "url_du_pdf_1.pdf"
-  },
+
   // Ajoutez d'autres tracts si besoin
 ];
 
@@ -146,8 +142,9 @@ const NosActions = () => {
     <div className="nos-actions">
       <h2>Nos Actions</h2>
       <section id="telechargement-section">
-        <h2>Courriers</h2>
-        <Téléchargement />
+       
+      <h2>Courriers</h2>
+        <Téléchargement type="courrier" />
       </section>
       <section id="tract-section">
         <h2>Tracts</h2>

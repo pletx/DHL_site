@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import DroitCard from '../../components/DroitCard';
+import Téléchargement from '../../components/Téléchargement';
 import './PageDroits.css';
-const apiUrl = process.env.REACT_APP_API_URL;
+
 const NosDroits = () => {
   const [droits, setDroits] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);  // Vérifier si l'utilisateur est connecté
@@ -121,6 +122,10 @@ const NosDroits = () => {
           </div>
         )}
       </div>
+      
+      <h2>Droits</h2>
+      <Téléchargement type="droit" />
+
     </div>
   );
 };

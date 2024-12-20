@@ -7,7 +7,7 @@ import Contact from './pages/Contact/PageContact';
 import HomePage from './pages/Home/Home';
 import Information from './pages/Information/Information'
 import Error404 from './pages/Error404/Error404';
-
+import Accords from './pages/Accord/PageAccord';
 import { AuthProvider } from './AuthContext'; // Import du AuthProvider
 
 function App() {
@@ -20,6 +20,7 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/actions" element={<NosActions />} />
             <Route path="/droits" element={<NosDroits />} />
+            <Route path="/accords" element={<Accords />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/information" element={<Information />} /> 
             <Route path="*" element={<Error404 />} />
