@@ -15,7 +15,7 @@ const ContactForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const mailtoLink = `mailto:eddytougon@gmail.com?subject=${encodeURIComponent('Contact Form Submission')}&body=${encodeURIComponent(
+    const mailtoLink = `mailto:jujitsu.stephane@live.fr?subject=${encodeURIComponent('Contact Form Submission')}&body=${encodeURIComponent(
       `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
     )}`;
     window.location.href = mailtoLink;
