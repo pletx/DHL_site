@@ -9,3 +9,4 @@ const Teammate = ({ name, role, image }) => {
 };
 
 export default Teammate;
+

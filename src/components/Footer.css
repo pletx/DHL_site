@@ -1,0 +1,88 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.content {
+  flex: 1;
+}
+
+footer {
+  background-color: rgb(58, 58, 58);
+  padding: 30px 20px 20px;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Pour séparer haut et bas */
+  min-height: 150px; /* Ajuste la hauteur selon besoin */
+}
+
+.container {
+  max-width: 1140px;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-up {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 0%;
+  margin-bottom: 0%;
+  justify-content: center; /* Centre les colonnes horizontalement */
+  align-items: center;
+  width: 100%;
+  color: white;
+}
+
+.footer-col {
+   min-width: 250px;
+  text-align: center;
+}
+
+.footer-col p {
+  margin: 5px 0;
+  text-align: left;
+}
+
+.social-icons {
+  display: flex;
+  gap: 20px;
+  margin-top: 10px;
+  justify-content: flex-start;
+}
+
+.social-icons a {
+  color: rgb(255, 255, 255);
+  font-size: 28px;
+  transition: transform 0.3s, color 0.3s;
+  text-decoration: none;
+}
+
+.social-icons a:hover {
+  transform: scale(1.2);
+  color: #8690f7;
+}
+
+.social-icons a.whatsapp:hover {
+  color: #6bdd3e;
+}
+
+.footer-bottom {
+  color: rgb(255, 255, 255);
+  font-size: 16px;
+  width: 100%;
+  text-align: center; /* Centre horizontalement */
+  align-self: center; /* Assure que c’est bien centré dans flex */
+}
