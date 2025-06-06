@@ -23,7 +23,7 @@ footer {
   display: flex;
   flex-direction: column;
   justify-content: space-between; /* Pour séparer haut et bas */
-  min-height: 150px; /* Ajuste la hauteur selon besoin */
+  min-height: 180px; /* Ajuste la hauteur selon besoin */
 }
 
 .container {
@@ -32,6 +32,8 @@ footer {
   width: 100%;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  
 }
 
 .footer-up {

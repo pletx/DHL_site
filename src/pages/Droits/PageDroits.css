@@ -5,7 +5,7 @@
     flex-direction: column;
     padding: 20px;
     box-sizing: border-box;
-    background: linear-gradient(to right, rgb(255, 42, 0), yellow);
+    background: linear-gradient(to right, rgb(255, 255, 255), rgb(255, 89, 0));
   }
   
   
@@ -35,4 +35,6 @@
   .edit-form button {
     margin: 10px 0;
   }
+
+
   

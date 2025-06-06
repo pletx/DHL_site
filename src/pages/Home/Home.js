@@ -45,13 +45,11 @@ N'hésitez pas à nous contacter pour toute question ou pour adhérer à notre s
 Fraternellement."
           />
         </div>
+        
       </div>
       <section id="nos-equipe">
         <Team />
       </section>
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></link>
-      
-
     </div>
 
   );
