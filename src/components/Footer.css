@@ -17,7 +17,7 @@ html, body {
 
 footer {
   background-color: rgba(21, 21, 21, 0.75);
-  padding: 30px 20px 20px;
+  padding: 10px;
   width: 100%;
   box-sizing: border-box;
   display: flex;
@@ -59,7 +59,6 @@ footer {
   gap: 30px; /* espace entre chaque élément */
   flex-wrap: wrap; /* pour que ça s'adapte sur petits écrans */
   color: white;
-  font-weight: bold;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 16px;
 }
