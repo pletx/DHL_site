@@ -99,7 +99,13 @@ const Team = () => {
       <div className="team-list">
         {teamMembers.map((member) => (
           <div className="team-member" key={member._id}>
-            <img src={member.photoUrl} alt={member.name} className="team-photo" />
+            {member.photoUrl ? (
+              <img src={member.photoUrl} alt={member.name} className="team-photo" />
+            ) : (
+              <div className="team-photo-placeholder">
+                <i className="fas fa-user"></i>
+              </div>
+            )}
             <h3>{member.name}</h3>
             <p>{member.role}</p>
             {isLoggedIn && (
