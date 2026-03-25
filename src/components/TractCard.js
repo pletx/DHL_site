@@ -29,6 +29,10 @@ const TractCard = ({ tract, onDelete, onEdit }) => {
     setIsOpen(!isOpen);
   };
 
+  // Détermine si le fichier est un PDF
+  const isPdf = tract.imageUrl && tract.imageUrl.toLowerCase().endsWith('.pdf');
+  const downloadLabel = isPdf ? 'Télécharger le PDF' : "Télécharger l'image";
+
   return (
     <div className="tract-card">
       <h3 onClick={toggleOpen} className="tract-title">{tract.title}</h3>
@@ -38,8 +42,18 @@ const TractCard = ({ tract, onDelete, onEdit }) => {
         <div className="tract-content">
           {tract.imageUrl && (
             <div className='tract-card'>
-              <img src={tract.imageUrl} alt={tract.title} width="200" />
-              <button onClick={handleDownloadImage}>Télécharger l'image</button>
+              {isPdf ? (
+                <iframe
+                  src={tract.imageUrl}
+                  title={tract.title}
+                  className="tract-pdf-preview"
+                  width="100%"
+                  height="400"
+                />
+              ) : (
+                <img src={tract.imageUrl} alt={tract.title} width="200" />
+              )}
+              <button onClick={handleDownloadImage}>{downloadLabel}</button>
             </div>
           )}
           <div>

@@ -24,6 +24,17 @@
   margin-bottom: 10px;
 }
 
+.tract-pdf-preview {
+  display: block;
+  width: 100%;
+  max-width: 1000px;
+  height: 400px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
 button {
   margin-top: 5px;
   padding: 5px 10px;
