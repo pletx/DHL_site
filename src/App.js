@@ -8,6 +8,7 @@ import HomePage from './pages/Home/Home';
 import Information from './pages/Information/Information'
 import Error404 from './pages/Error404/Error404';
 import Accords from './pages/Accord/PageAccord';
+import MentionsLegales from './pages/MentionsLegales/MentionsLegales';
 import { AuthProvider } from './AuthContext'; // Import du AuthProvider
 import Footer from "./components/Footer";
 
@@ -25,6 +26,7 @@ function App() {
             <Route path="/accords" element={<Accords />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/information" element={<Information />} /> 
+            <Route path="/mentions-legales" element={<MentionsLegales />} />
             <Route path="*" element={<Error404 />} />
           </Routes>
           <Footer /> 
