@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import api from '../api';
 import './QuestionReponse.css';
-const apiUrl = process.env.REACT_APP_API_URL;
 const QuestionReponse = ({ question, answer, id, onDelete, isLoggedIn }) => {
   const [isOpen, setIsOpen] = useState(false);  // Pour afficher ou cacher la réponse
   const [isEditing, setIsEditing] = useState(false);  // Pour savoir si le composant est en mode édition
@@ -22,7 +21,7 @@ const QuestionReponse = ({ question, answer, id, onDelete, isLoggedIn }) => {
   const handleSave = async () => {
     try {
       // Effectuer la mise à jour sur le serveur
-      const response = await axios.put(`${process.env.REACT_APP_API_URL}/api/question-reponse/${id}`, {
+      const response = await api.put(`/api/question-reponse/${id}`, {
         question: newQuestion,
         answer: newAnswer,
       });
@@ -37,7 +36,7 @@ const QuestionReponse = ({ question, answer, id, onDelete, isLoggedIn }) => {
   // Gérer la suppression de la question-réponse
   const handleDelete = async () => {
     try {
-      await axios.delete(`${apiUrl}/api/question-reponse/${id}`);
+      await api.delete(`/api/question-reponse/${id}`);
       onDelete(id); // Appeler la fonction de suppression dans le parent pour supprimer la question de la liste
     } catch (error) {
       console.error('Erreur lors de la suppression de la question-réponse', error);

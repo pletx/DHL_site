@@ -1,47 +1,78 @@
 .tract-card {
-  margin-bottom: 20px;
+  margin-bottom: var(--spacing-lg);
   cursor: pointer;
+  background: var(--text-white);
+  padding: var(--spacing-lg);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-base);
+  border-top: 4px solid var(--primary-color);
 }
 
-.tract-title { 
+.tract-card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-4px);
+}
+
+.tract-title {
   width: 100%;
   text-align: center;
-  font-size: 18px;
-  color: #333;
+  font-size: 1.1rem;
+  color: var(--text-primary);
+  font-weight: 600;
+  transition: all var(--transition-fast);
 }
-.tract-title:hover{
-  font-size: 20px;
-  color: #a10000;
+
+.tract-title:hover {
+  color: var(--primary-color);
+  font-size: 1.15rem;
 }
+
 .tract-content {
-  margin-top: 10px;
-  padding: 10px;
-  border-radius: 8px;
+  margin-top: var(--spacing-base);
+  padding: var(--spacing-base);
+  border-radius: var(--radius-md);
+  background-color: var(--bg-primary);
+    width: 100%;
 }
 
 .tract-content img {
   display: block;
-  margin-bottom: 10px;
+  margin-bottom: var(--spacing-base);
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
 }
+
+
 
 .tract-pdf-preview {
   display: block;
   width: 100%;
-  max-width: 1000px;
-  height: 400px;
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+  max-width: none;
+  height: min(70vh, 900px);
+  margin-bottom: var(--spacing-base);
+  border: 2px solid var(--primary-color);
+  border-radius: var(--radius-md);
   overflow: hidden;
 }
 
 button {
-  margin-top: 5px;
-  padding: 5px 10px;
-  font-size: 14px;
+  margin-top: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-base);
+  font-size: 0.9rem;
   width: auto;
+  background-color: var(--primary-color);
+  color: var(--text-white);
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-weight: 500;
 }
 
 button:hover {
-  background-color: #d24600;
+  background-color: var(--primary-dark);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
 }

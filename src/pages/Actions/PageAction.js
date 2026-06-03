@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useLocation } from 'react-router-dom';
-import axios from 'axios';
+import api, { getApiErrorMessage } from '../../api';
 import ActionCard from '../../components/ActionCard';
 import TractCard from '../../components/TractCard';
 import Téléchargement from '../../components/Téléchargement';
@@ -30,6 +30,7 @@ const NosActions = () => {
   const [actions, setActions] = useState(initialActions);
   const [tracts, setTracts] = useState(initialTracts);
   const [newAction, setNewAction] = useState({ title: '', text: '', image: null });
+  const [errorMessage, setErrorMessage] = useState('');
   const [newTract, setNewTract] = useState({ title: '', image: null, pdf: null });
   const [editingAction, setEditingAction] = useState(null); // Pour gérer l'édition des actions
   const location = useLocation();
@@ -37,7 +38,7 @@ const NosActions = () => {
   useEffect(() => {
     const fetchActions = async () => {
       try {
-        const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/actions`);
+        const response = await api.get('/api/actioncards');
         setActions(response.data);
       } catch (error) {
         console.error('Erreur lors de la récupération des actions:', error);
@@ -46,7 +47,7 @@ const NosActions = () => {
 
     const fetchTracts = async () => {
       try {
-        const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/tracts`);
+        const response = await api.get('/api/tracts');
         setTracts(response.data);
       } catch (error) {
         console.error('Erreur lors de la récupération des tracts:', error);
@@ -68,14 +69,25 @@ const NosActions = () => {
 
     try {
       const response = editingAction
-        ? await axios.put(`${process.env.REACT_APP_API_URL}/api/actions/${editingAction._id}`, formData)
-        : await axios.post(`${process.env.REACT_APP_API_URL}/api/actions`, formData);
+        ? await api.put(`/api/actioncards/${editingAction._id}`, formData)
+        : await api.post('/api/actioncards', formData);
       if (response.data) {
-        setActions(prevActions => [...prevActions, response.data]);
+        if (editingAction) {
+          setActions(prevActions =>
+            prevActions.map(action =>
+              action._id === response.data._id ? response.data : action
+            )
+          );
+        } else {
+          setActions(prevActions => [...prevActions, response.data]);
+        }
         setNewAction({ title: '', text: '', image: null });
         setEditingAction(null);
+        setErrorMessage('');
       }
     } catch (error) {
+      const message = getApiErrorMessage(error);
+      setErrorMessage(message);
       console.error('Erreur lors de l\'ajout ou modification de l\'action:', error);
     }
   };
@@ -92,30 +104,59 @@ const NosActions = () => {
     }
 
     try {
-      const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/tracts`, formData);
+      const response = await api.post('/api/tracts', formData);
       if (response.data) {
         setTracts(prevTracts => [...prevTracts, response.data]);
         setNewTract({ title: '', image: null, pdf: null });
+        setErrorMessage('');
       }
     } catch (error) {
+      const message = getApiErrorMessage(error);
+      setErrorMessage(message);
       console.error('Erreur lors de l\'ajout du tract:', error);
     }
   };
 
   const handleDeleteAction = async (id) => {
     try {
-      await axios.delete(`${process.env.REACT_APP_API_URL}/api/actions/${id}`);
+      const token = localStorage.getItem('token');
+      console.debug('Deleting action', id, 'token=', token);
+      if (!token) {
+        const msg = 'Vous devez être connecté pour supprimer une action. Veuillez vous reconnecter.';
+        setErrorMessage(msg);
+        console.warn('Delete aborted: no token');
+        return;
+      }
+      await api.delete(`/api/actioncards/${id}`, {
+        headers: token ? { 'x-auth-token': token } : {},
+      });
       setActions(actions.filter(action => action._id !== id));
+      setErrorMessage('');
     } catch (error) {
+      const message = getApiErrorMessage(error);
+      setErrorMessage(message);
       console.error('Erreur lors de la suppression de l\'action:', error);
     }
   };
 
   const handleDeleteTract = async (id) => {
     try {
-      await axios.delete(`${process.env.REACT_APP_API_URL}/api/tracts/${id}`);
+      const token = localStorage.getItem('token');
+      console.debug('Deleting tract', id, 'token=', token);
+      if (!token) {
+        const msg = 'Vous devez être connecté pour supprimer un tract. Veuillez vous reconnecter.';
+        setErrorMessage(msg);
+        console.warn('Delete aborted: no token');
+        return;
+      }
+      await api.delete(`/api/tracts/${id}`, {
+        headers: token ? { 'x-auth-token': token } : {},
+      });
       setTracts(tracts.filter(tract => tract._id !== id));
+      setErrorMessage('');
     } catch (error) {
+      const message = getApiErrorMessage(error);
+      setErrorMessage(message);
       console.error('Erreur lors de la suppression du tract:', error);
     }
   };
@@ -141,6 +182,7 @@ const NosActions = () => {
   return (
     <div className="nos-actions">
       <h2>Nos Actions</h2>
+      {errorMessage && <div className="error-message">{errorMessage}</div>}
       <section id="telechargement-section">
        
       <h2>Courriers</h2>
@@ -153,7 +195,6 @@ const NosActions = () => {
             key={tract._id}
             tract={tract}
             onDelete={handleDeleteTract}
-            onEdit={handleEditAction}
           />
         ))}
 
@@ -171,6 +212,11 @@ const NosActions = () => {
               type="file"
               accept="image/*"
               onChange={(e) => setNewTract({ ...newTract, image: e.target.files[0] })}
+            />
+            <input
+              type="file"
+              accept="application/pdf"
+              onChange={(e) => setNewTract({ ...newTract, pdf: e.target.files[0] })}
             />
             <button type="submit">Ajouter</button>
           </form>

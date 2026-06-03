@@ -3,70 +3,97 @@
   max-width: 100%;
   margin: auto;
   overflow: hidden;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
 }
 
 .carousel {
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: transform 0.5s ease;
-  height: 100%; /* S'assurer que le carousel prend toute la hauteur du conteneur */
+  transition: transform var(--transition-base);
+  height: 100%;
 }
 
 .carousel-image {
   width: 100%;
   max-width: 500px;
-  height: 100%; /* Ajuster l'image pour prendre toute la hauteur du conteneur */
-  object-fit: scale-down; /* Garder le ratio tout en remplissant le conteneur */
+  height: 100%;
+  object-fit: scale-down;
 }
 
 .carousel-button {
   position: absolute;
   transform: translateY(-50%);
-  background: rgba(133, 133, 133, 0.7);
+  background: rgba(230, 126, 34, 0.85);
+  color: var(--text-white);
   border: none;
-  border-radius: 5px;
+  border-radius: var(--radius-md);
   cursor: pointer;
-  padding: 10px;
+  padding: var(--spacing-base);
   width: auto;
   z-index: 10;
+  font-weight: 600;
+  transition: all var(--transition-base);
+}
+
+.carousel-button:hover {
+  background: var(--primary-dark);
+  box-shadow: var(--shadow-md);
 }
 
 .carousel-button.left {
-  left: 10px;
+  left: var(--spacing-base);
   top: 50%;
 }
 
 .carousel-button.right {
-  right: 10px;
+  right: var(--spacing-base);
   top: 50%;
 }
 
 .dropzone {
-  border: 2px dashed #007bff;
-  padding: 20px;
+  border: 2px dashed var(--primary-color);
+  padding: var(--spacing-lg);
   text-align: center;
-  margin-top: 10px;
-  border-radius: 10px;
+  margin-top: var(--spacing-base);
+  border-radius: var(--radius-lg);
+  background-color: rgba(230, 126, 34, 0.05);
+  transition: all var(--transition-base);
+  cursor: pointer;
+}
+
+.dropzone:hover {
+  background-color: rgba(230, 126, 34, 0.1);
+  border-color: var(--primary-dark);
 }
 
 .image-list {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin-top: 20px;
+  margin-top: var(--spacing-lg);
+  gap: var(--spacing-base);
 }
 
 .image-item {
   position: relative;
-  margin: 10px;
+  margin: var(--spacing-base);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  transition: transform var(--transition-base);
+}
+
+.image-item:hover {
+  transform: scale(1.05);
 }
 
 .uploaded-image {
   width: 100px;
   height: 100px;
   object-fit: cover;
-  border-radius: 5px;
+  border-radius: var(--radius-md);
 }
 
 .image-item button {
@@ -76,4 +103,14 @@
   border: none;
   cursor: pointer;
   width: auto;
+  background-color: var(--danger-color);
+  color: var(--text-white);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+}
+
+.image-item button:hover {
+  background-color: #c0392b;
+  transform: scale(1.1);
 }

@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
-const apiUrl = process.env.REACT_APP_API_URL;
+import api, { getApiErrorMessage } from './api';
+
 // Créer le contexte d'authentification
 export const AuthContext = createContext();
 
@@ -18,6 +19,7 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
   // Vérifier si l'utilisateur est connecté à partir du token local
   useEffect(() => {
@@ -30,25 +32,25 @@ export const AuthProvider = ({ children }) => {
   // Fonction pour la connexion
   const login = async (username, password) => {
     setLoading(true);
+    setError('');
     try {
-      const response = await fetch(`${ process.env.REACT_APP_API_URL}/api/admin/auth/login`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ username, password }), // Utilisation correcte de username
-      });
+      const response = await api.post('/api/admin/auth/login', { username, password });
+      const data = response.data;
+      const token = data.token || data.accessToken || data.access_token;
 
-      const data = await response.json();
-
-      if (response.ok) {
-        localStorage.setItem('token', data.token);
+      if (response.status === 200 && token) {
+        localStorage.setItem('token', token);
         setIsLoggedIn(true);
       } else {
-        throw new Error(data.message || 'Échec de la connexion');
+        const message = data.message || 'Échec de la connexion';
+        setError(message);
+        throw new Error(message);
       }
     } catch (error) {
+      const message = getApiErrorMessage(error);
+      setError(message);
       console.error('Erreur de connexion:', error);
+      throw new Error(message);
     } finally {
       setLoading(false);
     }
@@ -57,32 +59,21 @@ export const AuthProvider = ({ children }) => {
   // Fonction pour la déconnexion
   const logout = async () => {
     try {
-      const token = localStorage.getItem('token'); // Récupérer le token depuis le localStorage
-      if (!token) {
-        throw new Error('No token found');
-      }
-      const response = await fetch(`${ process.env.REACT_APP_API_URL}/api/admin/auth/logout`, {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${token}`, // Inclusion correcte du token dans les en-têtes
-        },
-      });
-
-      if (response.ok) {
-        localStorage.removeItem('token'); // Supprimer le token après une déconnexion réussie
-        setIsLoggedIn(false);
-      } else {
-        const errorData = await response.json();
-        throw new Error(errorData.message || 'Failed to logout');
-      }
+      setError('');
+      await api.post('/api/admin/auth/logout');
+      localStorage.removeItem('token'); // Supprimer le token après une déconnexion réussie
+      setIsLoggedIn(false);
     } catch (error) {
+      const message = getApiErrorMessage(error);
+      setError(message);
       console.error('Erreur lors de la déconnexion:', error);
+      throw new Error(message);
     }
   };
 
   // Fournir le contexte aux composants enfants
   return (
-    <AuthContext.Provider value={{ isLoggedIn, loading, login, logout }}>
+    <AuthContext.Provider value={{ isLoggedIn, loading, error, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

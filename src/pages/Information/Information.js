@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../../api';
 import QuestionReponse from '../../components/QuestionReponse';
 import './Information.css';
-const apiUrl = process.env.REACT_APP_API_URL;
 const QuestionsReponses = () => {
   const [questionsReponses, setQuestionsReponses] = useState([]);  // Liste des questions-réponses
   const [newQuestion, setNewQuestion] = useState('');
@@ -23,7 +22,7 @@ const QuestionsReponses = () => {
 
   const fetchQuestionsReponses = async () => {
     try {
-      const response = await axios.get(`${ process.env.REACT_APP_API_URL}/api/question-reponse`);
+      const response = await api.get('/api/question-reponse');
       setQuestionsReponses(response.data);
     } catch (error) {
       console.error('Erreur lors de la récupération des questions et réponses', error);
@@ -38,7 +37,7 @@ const QuestionsReponses = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`${ process.env.REACT_APP_API_URL}/api/question-reponse/${id}`);
+      await api.delete(`/api/question-reponse/${id}`);
       setQuestionsReponses(questionsReponses.filter((qr) => qr._id !== id));
     } catch (error) {
       console.error('Erreur lors de la suppression de la question-réponse', error);
@@ -65,7 +64,7 @@ const QuestionsReponses = () => {
             <button
               onClick={async () => {
                 try {
-                  const response = await axios.post(`${ process.env.REACT_APP_API_URL}/api/question-reponse`, {
+                  const response = await api.post('/api/question-reponse', {
                     question: newQuestion,
                     answer: newAnswer,
                   });

@@ -1,25 +1,24 @@
 .droit-card {
   display: flex;
-  padding: 10px;
-  border-radius: 15px;
-  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
-  background: rgba(253, 253, 253, 0.8);
-  margin: 20px auto;
-
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: var(--spacing-base);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  background: var(--text-white);
+  margin: var(--spacing-lg) auto;
+  transition: all var(--transition-base);
   flex-wrap: wrap;
   overflow: hidden;
   text-align: center;
+  border-left: 5px solid var(--primary-color);
 }
 
 .droit-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.25);
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
 }
 
 .text-content {
-  
-  padding: 20px;
+  padding: var(--spacing-lg);
   box-sizing: border-box;
   max-height: 100%;
   display: flex;
@@ -30,14 +29,17 @@
 }
 
 .text-content h2 {
-  font-size: 1.8em;
-  margin-bottom: 0.5em;
+  font-size: 1.5rem;
+  margin-bottom: var(--spacing-base);
+  color: var(--primary-color);
+  font-weight: 600;
 }
 
 .text-content p {
-  font-size: 1em;
+  font-size: 0.95rem;
   line-height: 1.6;
   max-width: 90%;
+  color: var(--text-secondary);
 }
 
 .image-content {
@@ -54,7 +56,12 @@
   height: auto;
   max-height: 100%;
   object-fit: contain;
-  border-radius: 10px;
+  border-radius: var(--radius-md);
+  transition: transform var(--transition-base);
+}
+
+.image-content img:hover {
+  transform: scale(1.05);
 }
 
 /* Classes pour alterner l'image entre la gauche et la droite */
@@ -65,17 +72,19 @@
 .image-left .image-content {
   order: -1;
 }
+
 .edit-form {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: var(--spacing-lg);
+  background-color: var(--bg-secondary);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
   width: 80%;
   max-width: 600px;
-  margin: 20px auto;
+  margin: var(--spacing-lg) auto;
+  border: 2px solid var(--primary-color);
 }
 
 .form-group {

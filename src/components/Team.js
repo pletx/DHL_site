@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../AuthContext';
-import axios from 'axios';
+import api from '../api';
 import './Team.css';
 
 const Team = () => {
@@ -12,7 +12,7 @@ const Team = () => {
   useEffect(() => {
     const fetchTeamMembers = async () => {
       try {
-        const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/team`);
+        const response = await api.get('/api/team');
         setTeamMembers(response.data);
       } catch (error) {
         console.error('Échec de la récupération des membres de l\'équipe :', error);
@@ -49,9 +49,7 @@ const Team = () => {
         formData.append('photo', newMember.photo);
       }
 
-      const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/team`, formData, {
-        headers: { 'Content-Type': 'multipart/form-data' },
-      });
+      const response = await api.post('/api/team', formData);
 
       setTeamMembers([...teamMembers, response.data]);
       setNewMember({ name: '', role: '', photo: null });
@@ -69,9 +67,7 @@ const Team = () => {
         formData.append('photo', editMember.photo);
       }
 
-      const response = await axios.put(`${process.env.REACT_APP_API_URL}/api/team/${editMember._id}`, formData, {
-        headers: { 'Content-Type': 'multipart/form-data' },
-      });
+      const response = await api.put(`/api/team/${editMember._id}`, formData);
 
       setTeamMembers(
         teamMembers.map((member) =>
@@ -86,7 +82,7 @@ const Team = () => {
 
   const handleDeleteMember = async (id) => {
     try {
-      await axios.delete(`${process.env.REACT_APP_API_URL}/api/team/${id}`);
+      await api.delete(`/api/team/${id}`);
       setTeamMembers(teamMembers.filter((member) => member._id !== id));
     } catch (error) {
       console.error('Échec de la suppression du membre de l\'équipe :', error);

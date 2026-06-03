@@ -2,15 +2,15 @@
 .about-us {
   position: relative;
   overflow: hidden;
-  color: #000000;
+  color: var(--text-primary);
   text-align: center;
-  padding: 60px 20px;
-  background-color: rgb(247, 247, 247);
+  padding: var(--spacing-xl) var(--spacing-lg);
+  background-color: var(--bg-primary);
   background-size: cover;
   background-position: center;
   opacity: 0;
   transform: translateY(20px);
-  transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out;
+  transition: opacity var(--transition-slow), transform var(--transition-slow);
 }
 
 .about-us.visible {
@@ -25,7 +25,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  transition: opacity 0.3s ease-in-out;
+  transition: opacity var(--transition-base);
   opacity: 0;
 }
 
@@ -36,14 +36,18 @@
 .about-us-content {
   position: relative;
   z-index: 1;
+  max-width: 1000px;
+  width: 100%;
+  margin: 0 auto;
 }
 
 .about-us h2 {
-  font-size: 36px;
-  margin-bottom: 20px;
+  font-size: 2rem;
+  margin-bottom: var(--spacing-lg);
   opacity: 0;
   transform: translateY(-20px);
-  transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out;
+  transition: opacity var(--transition-slow), transform var(--transition-slow);
+  color: var(--primary-color);
 }
 
 .about-us.visible h2 {
@@ -52,12 +56,14 @@
 }
 
 .about-us p {
-  font-size: 18px;
-  max-width: 600px;
+  font-size: 1rem;
+  max-width: 700px;
   margin: 0 auto;
   opacity: 0;
   transform: translateY(20px);
-  transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out;
+  transition: opacity var(--transition-slow), transform var(--transition-slow);
+  line-height: 1.8;
+  color: var(--text-secondary);
 }
 
 .about-us.visible p {
@@ -68,15 +74,15 @@
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .about-us {
-    padding: 40px 15px;
+    padding: var(--spacing-lg) var(--spacing-base);
   }
 
   .about-us h2 {
-    font-size: 28px;
+    font-size: 1.5rem;
   }
 
   .about-us p {
-    font-size: 16px;
+    font-size: 0.95rem;
   }
 }
 

@@ -56,12 +56,17 @@ const Footer = () => {
           >
             Statuts CGT
           </a>
+          
         </div>
+        
       </div>
 
       {/* Barre du bas */}
       <div className="footer-bottom-bar">
+        <h5>Site syndical indépendant édité par le syndicat CGT des salariés de DHL International Express 
+          Ce site n'est pas édité par DHL International Express et n'a aucun lien institutionnel avec celui-ci.</h5>
         <p>© {new Date().getFullYear()} CGT DHL Express International — Tous droits réservés</p>
+        
       </div>
     </footer>
   );

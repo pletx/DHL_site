@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api, { getApiErrorMessage } from '../api';
 import './DroitCard.css';
-const apiUrl = process.env.REACT_APP_API_URL;
 const DroitCard = ({ title, text, image, id, onDelete, onAdd, index }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [newTitle, setNewTitle] = useState(title || '');
@@ -9,6 +8,7 @@ const DroitCard = ({ title, text, image, id, onDelete, onAdd, index }) => {
   const [newImage, setNewImage] = useState(null);
   const [imageUrl, setImageUrl] = useState(image || '');
   const [isLoggedIn, setIsLoggedIn] = useState(false);  // Vérifier si l'utilisateur est connecté
+  const [errorMessage, setErrorMessage] = useState('');
 
   // Vérifiez la connexion de l'utilisateur (par exemple avec un token dans localStorage)
   useEffect(() => {
@@ -36,29 +36,27 @@ const DroitCard = ({ title, text, image, id, onDelete, onAdd, index }) => {
     if (id) {
       // Mise à jour d'un DroitCard existant
       try {
-        const response = await axios.put(`${apiUrl}/api/droit-cards/${id}`, formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-        });
+        const response = await api.put(`/api/droitcards/${id}`, formData);
         setIsEditing(false);
+        setErrorMessage('');
       } catch (error) {
+        const message = getApiErrorMessage(error);
+        setErrorMessage(message);
         console.error('Erreur lors de la mise à jour de la carte', error);
       }
     } else {
       // Création d'un nouveau DroitCard
       try {
-        const response = await axios.post(`${apiUrl}/api/droit-cards`, formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-        });
+        const response = await api.post('/api/droitcards', formData);
         onAdd(response.data);
         setNewTitle('');
         setNewText('');
         setImageUrl('');
         setIsEditing(false);
+        setErrorMessage('');
       } catch (error) {
+        const message = getApiErrorMessage(error);
+        setErrorMessage(message);
         console.error('Erreur lors de la création de la carte', error);
       }
     }
@@ -66,9 +64,11 @@ const DroitCard = ({ title, text, image, id, onDelete, onAdd, index }) => {
 
   const handleDeleteCard = async () => {
     try {
-      await axios.delete(`${apiUrl}/api/droit-cards/${id}`);
+      await api.delete(`/api/droitcards/${id}`);
       onDelete(id);
     } catch (error) {
+      const message = getApiErrorMessage(error);
+      setErrorMessage(message);
       console.error('Erreur lors de la suppression de la carte', error);
     }
   };
@@ -94,6 +94,7 @@ const DroitCard = ({ title, text, image, id, onDelete, onAdd, index }) => {
         <div>
           {isEditing ? (
             <div className="edit-form">
+              {errorMessage && <div className="error-message">{errorMessage}</div>}
               <input
                 value={newTitle}
                 onChange={(e) => setNewTitle(e.target.value)}

@@ -32,10 +32,7 @@ const HomePage = () => {
   return (
     <div className="home-page">
       <div className="content-wrapper">
-        <div className="left-content">
-          <MinimalCarousel />
-        </div>
-        <div className="right-content">
+        <div className="about-section">
           <AboutUs
             title="Qui Sommes-Nous"
             text=" Le syndicat des salariés CGT-DHL Express International a été créé en 1998, notre objectif est de défendre vos droits, améliorer vos conditions de travail et garantir une meilleure qualité de vie professionnelle pour tous.
@@ -45,7 +42,9 @@ N'hésitez pas à nous contacter pour toute question ou pour adhérer à notre s
 Fraternellement."
           />
         </div>
-        
+        <div className="carousel-section">
+          <MinimalCarousel />
+        </div>
       </div>
       <section id="nos-equipe">
         <Team />

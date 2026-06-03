@@ -1,11 +1,20 @@
 .teammate-card {
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 10px;
-  margin: 10px;
+  border: none;
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  margin: var(--spacing-base);
   width: 200px;
   text-align: center;
-  position: relative; /* Ajoutez cette ligne si nécessaire */
+  position: relative;
+  background-color: var(--text-white);
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-base);
+  border-top: 4px solid var(--primary-color);
+}
+
+.teammate-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
 }
 
 .teammate-card img {
@@ -13,41 +22,53 @@
   height: 120px;
   border-radius: 50%;
   object-fit: cover;
-  border: 3px solid #e9ecef;
-  margin-bottom: 10px;
+  border: 4px solid var(--primary-color);
+  margin-bottom: var(--spacing-base);
+  transition: transform var(--transition-base);
+}
+
+.teammate-card img:hover {
+  transform: scale(1.05);
 }
 
 .teammate-photo-placeholder {
   width: 120px;
   height: 120px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #e9ecef, #ced4da);
+  background: linear-gradient(135deg, var(--bg-secondary), var(--text-light));
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 10px;
-  border: 3px solid #e9ecef;
+  margin: 0 auto var(--spacing-base);
+  border: 4px solid var(--primary-color);
 }
 
 .teammate-photo-placeholder i {
   font-size: 48px;
-  color: #adb5bd;
+  color: var(--primary-color);
 }
 
 .admin-buttons {
-  margin-top: 10px;
+  margin-top: var(--spacing-base);
+  display: flex;
+  gap: var(--spacing-sm);
+  justify-content: center;
 }
 
 .admin-buttons button {
-  margin-right: 5px;
-  padding: 5px 10px;
-  background-color: #007bff;
-  color: white;
+  padding: var(--spacing-sm) var(--spacing-base);
+  background-color: var(--primary-color);
+  color: var(--text-white);
   border: none;
-  border-radius: 3px;
+  border-radius: var(--radius-md);
   cursor: pointer;
+  transition: all var(--transition-fast);
+  font-weight: 500;
+  font-size: 0.9rem;
 }
 
 .admin-buttons button:hover {
-  background-color: #0056b3;
+  background-color: var(--primary-dark);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
 }

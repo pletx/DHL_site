@@ -1,18 +1,22 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../AuthContext';
-import axios from 'axios';
+import api from '../api';
 import './ActionCard.css'; // Assurez-vous que le fichier CSS est bien importé
 
-const ActionCards = () => {
+const ActionCards = (props) => {
+  const { action, onDelete, onEdit } = props || {};
   const { isLoggedIn } = useContext(AuthContext);
   const [actionCards, setActionCards] = useState([]);
   const [newActionCard, setNewActionCard] = useState({ title: '', text: '', image: null });
   const [editActionCard, setEditActionCard] = useState(null);
+  const [isOpenLocal, setIsOpenLocal] = useState(false);
 
   useEffect(() => {
+    // Only fetch full list when component is used without an `action` prop
+    if (action) return;
     const fetchActionCards = async () => {
       try {
-        const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/action-cards`);
+        const response = await api.get('/api/actioncards');
         setActionCards(response.data);
       } catch (error) {
         console.error('Échec de la récupération des actions :', error);
@@ -20,7 +24,7 @@ const ActionCards = () => {
     };
 
     fetchActionCards();
-  }, []);
+  }, [action]);
 
   const handleFileChange = (event) => {
     setNewActionCard({ ...newActionCard, image: event.target.files[0] });
@@ -49,9 +53,7 @@ const ActionCards = () => {
         formData.append('image', newActionCard.image);
       }
 
-      const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/action-cards`, formData, {
-        headers: { 'Content-Type': 'multipart/form-data' },
-      });
+      const response = await api.post('/api/actioncards', formData);
 
       setActionCards([...actionCards, response.data]);
       setNewActionCard({ title: '', text: '', image: null });
@@ -69,9 +71,7 @@ const ActionCards = () => {
         formData.append('image', editActionCard.image);
       }
 
-      const response = await axios.put(`${process.env.REACT_APP_API_URL}/api/action-cards/${editActionCard._id}`, formData, {
-        headers: { 'Content-Type': 'multipart/form-data' },
-      });
+      const response = await api.put(`/api/actioncards/${editActionCard._id}`, formData);
 
       setActionCards(
         actionCards.map((card) =>
@@ -86,7 +86,7 @@ const ActionCards = () => {
 
   const handleDeleteActionCard = async (id) => {
     try {
-      await axios.delete(`${process.env.REACT_APP_API_URL}/api/action-cards/${id}`);
+      await api.delete(`/api/actioncards/${id}`);
       setActionCards(actionCards.filter((card) => card._id !== id));
     } catch (error) {
       console.error('Échec de la suppression de l\'action :', error);
@@ -94,6 +94,10 @@ const ActionCards = () => {
   };
 
   const toggleCard = (id) => {
+    if (action) {
+      setIsOpenLocal(v => !v);
+      return;
+    }
     setActionCards(prevCards =>
       prevCards.map(card =>
         card._id === id ? { ...card, isOpen: !card.isOpen } : card
@@ -101,6 +105,24 @@ const ActionCards = () => {
     );
   };
 
+  // If an `action` prop is provided, render a single card (used by PageAction mapping)
+  if (action) {
+    return (
+      <div className={`action-member ${isOpenLocal ? 'active' : ''}`} onClick={() => toggleCard(action._id)}>
+        <img src={action.imageUrl} alt={action.title} />
+        <h3>{action.title}</h3>
+        {isOpenLocal && <p>{action.text}</p>}
+        {isLoggedIn && (
+          <div>
+            <button onClick={(e) => { e.stopPropagation(); onEdit && onEdit(action); }}>Modifier</button>
+            <button onClick={(e) => { e.stopPropagation(); onDelete && onDelete(action._id); }}>Supprimer</button>
+          </div>
+        )}
+      </div>
+    );
+  }
+
+  // Otherwise render the full list + admin form
   return (
     <div className="action-container">
       <div className="action-list">
@@ -112,7 +134,6 @@ const ActionCards = () => {
           >
             <img src={card.imageUrl} alt={card.title} />
             <h3>{card.title}</h3>
-            {/* Le texte est caché sauf si la carte est ouverte */}
             {card.isOpen && <p>{card.text}</p>}
             {isLoggedIn && (
               <div>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../../api';
 import DroitCard from '../../components/DroitCard';
 import Téléchargement from '../../components/Téléchargement';
 import './PageDroits.css';
@@ -18,7 +18,7 @@ const NosDroits = () => {
 
   const fetchDroits = async () => {
     try {
-      const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/droit-cards`);
+      const response = await api.get('/api/droitcards');
       setDroits(response.data);
     } catch (error) {
       console.error('Erreur lors de la récupération des droits', error);
@@ -56,11 +56,7 @@ const NosDroits = () => {
     }
 
     try {
-      const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/droit-cards`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
+      const response = await api.post('/api/droitcards', formData);
       handleAddDroit(response.data);
       setNewTitle('');
       setNewText('');

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../AuthContext';
-import axios from 'axios';
+import api, { getApiErrorMessage } from '../api';
 import './Carousel.css';
 
 const Carousel = () => {
@@ -10,12 +10,14 @@ const Carousel = () => {
   const [file, setFile] = useState(null);            // Fichier à uploader
   const [loading, setLoading] = useState(false);     // Chargement d'upload
   const [res, setRes] = useState(null);              // Réponse de l'upload
+  const [autoplay, setAutoplay] = useState(true);    // Contrôle du défilement automatique
+  const [errorMessage, setErrorMessage] = useState('');
 
   // Charger les images depuis le backend
   useEffect(() => {
     const fetchImages = async () => {
       try {
-        const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/admin/images`);
+        const response = await api.get('/api/admin/images');
         setImages(response.data);
       } catch (error) {
         console.error('Failed to fetch images:', error);
@@ -27,12 +29,13 @@ const Carousel = () => {
 
   // Ajouter le défilement automatique
   useEffect(() => {
+    if (!autoplay || images.length <= 1) return undefined;
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 6000); // Changer d'image toutes les 3 secondes
+    }, 6000);
 
     return () => clearInterval(interval);
-  }, [images.length]);
+  }, [images.length, autoplay]);
 
   // Gérer la sélection d'un fichier
   const handleFileChange = (event) => {
@@ -42,27 +45,25 @@ const Carousel = () => {
   // Gérer l'upload de l'image
   const handleUpload = async () => {
     if (!file) {
-      alert('Please select a file to upload');
+      setErrorMessage('Veuillez sélectionner un fichier à télécharger.');
       return;
     }
   
     try {
+      setErrorMessage('');
       setLoading(true); // Activer le chargement
       const data = new FormData();
       data.append("file", file); // Ajouter le fichier au FormData
   
       // Envoi de la requête d'upload
-      const res = await axios.post(`${process.env.REACT_APP_API_URL}/api/admin/upload-image`, data, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
+      const res = await api.post('/api/admin/upload-image', data);
   
       // Ajouter l'image uploadée à la liste des images
       setImages((prevImages) => [...prevImages, res.data]);
       setRes(res.data); // Stocker la réponse de l'upload
     } catch (error) {
-      alert(error.message);
+      const message = getApiErrorMessage(error);
+      setErrorMessage(message);
     } finally {
       setLoading(false); // Désactiver le chargement
     }
@@ -72,9 +73,12 @@ const Carousel = () => {
   // Gérer la suppression d'une image
   const deleteImage = async (imageUrl) => {
     try {
-      await axios.delete(`${process.env.REACT_APP_API_URL}/api/admin/delete-image`, { data: { imageUrl } });
+      await api.delete('/api/admin/delete-image', { data: { imageUrl } });
       setImages((prevImages) => prevImages.filter(image => image.url !== imageUrl));
+      setErrorMessage('');
     } catch (error) {
+      const message = getApiErrorMessage(error);
+      setErrorMessage(message);
       console.error('Failed to delete image:', error.response ? error.response.data : error.message);
     }
   };
@@ -90,7 +94,7 @@ const Carousel = () => {
   };
 
   return (
-    <div className="carousel-container">
+    <div className="carousel-container" onMouseEnter={() => setAutoplay(false)} onMouseLeave={() => setAutoplay(true)}>
       <div className="carousel">
         {images.length > 0 && (
           <img
@@ -107,8 +111,16 @@ const Carousel = () => {
         </button>
       </div>
 
+      <div style={{ display: 'flex', justifyContent: 'center', gap: '8px', marginTop: '8px' }}>
+        <button onClick={() => setAutoplay((v) => !v)} style={{ padding: '6px 10px', borderRadius: '6px' }}>
+          {autoplay ? 'Pause' : 'Play'}
+        </button>
+        <span style={{ alignSelf: 'center', color: 'var(--text-primary)' }}>{images.length} images</span>
+      </div>
+
       {isLoggedIn && (
         <div>
+          {errorMessage && <div className="error-message">{errorMessage}</div>}
           <input type="file" onChange={handleFileChange} />
           <button onClick={handleUpload} disabled={loading}>
             {loading ? 'Uploading...' : 'Upload'}

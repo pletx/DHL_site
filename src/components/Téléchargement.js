@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api, { getApiErrorMessage } from '../api';
 import './Téléchargement.css';
 
 const Téléchargement = ({ type }) => {
   const [pdfs, setPdfs] = useState([]);
   const [newPdf, setNewPdf] = useState({ title: '', file: null, type });
   const [isLoggedIn, setIsLoggedIn] = useState(false); // État de la connexion de l'utilisateur
-  const apiUrl = process.env.REACT_APP_API_URL;
+  const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
     // Vérifiez si l'utilisateur est connecté, par exemple avec un token dans le localStorage
@@ -20,7 +20,7 @@ const Téléchargement = ({ type }) => {
 
   const fetchPdfs = async (type) => {
     try {
-      const response = await axios.get(`${apiUrl}/api/pdfs/${type}`);
+      const response = await api.get(`/api/pdfs/${type}`);
       setPdfs(response.data);
     } catch (error) {
       console.error('Erreur lors de la récupération des PDFs:', error);
@@ -35,21 +35,23 @@ const Téléchargement = ({ type }) => {
     formData.append('type', newPdf.type);
 
     try {
-      const response = await axios.post(`${apiUrl}/api/pdfs`, formData, {
-        headers: { 'Content-Type': 'multipart/form-data' },
-      });
+      const response = await api.post('/api/pdfs', formData);
       setPdfs([...pdfs, response.data]);
       setNewPdf({ title: '', file: null, type });
     } catch (error) {
+      const message = getApiErrorMessage(error);
+      setErrorMessage(message);
       console.error('Erreur lors de l\'ajout du PDF:', error);
     }
   };
 
   const handleDeletePdf = async (id) => {
     try {
-      await axios.delete(`${apiUrl}/api/pdfs/${id}`);
+      await api.delete(`/api/pdfs/${id}`);
       setPdfs(pdfs.filter(pdf => pdf._id !== id));
     } catch (error) {
+      const message = getApiErrorMessage(error);
+      setErrorMessage(message);
       console.error('Erreur lors de la suppression du PDF:', error);
     }
   };
@@ -62,6 +64,7 @@ const Téléchargement = ({ type }) => {
     <div className="pdf-container">
       {isLoggedIn && (
         <form className="form-container" onSubmit={handleAddPdf}>
+          {errorMessage && <div className="error-message">{errorMessage}</div>}
           <input
             type="text"
             className="form-input-text"

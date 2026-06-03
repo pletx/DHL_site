@@ -7,20 +7,21 @@ const TractCard = ({ tract, onDelete, onEdit }) => {
   const [isOpen, setIsOpen] = useState(false); // Gère l'état de collapse du tract
 
   // Fonction pour télécharger l'image avec fetch
-  const handleDownloadImage = async () => {
+  const handleDownloadAsset = async (url, filename) => {
     try {
-      const imageResponse = await fetch(tract.imageUrl); // Récupère l'image depuis l'URL
-      const imageBlob = await imageResponse.blob(); // Convertit la réponse en blob
-      const imageURL = URL.createObjectURL(imageBlob); // Crée un objet URL temporaire pour le blob
+      const response = await fetch(url);
+      const blob = await response.blob();
+      const downloadUrl = URL.createObjectURL(blob);
 
       const link = document.createElement('a');
-      link.href = imageURL;
-      link.download = tract.title || 'image.jpg'; // Définit le nom du fichier à télécharger
+      link.href = downloadUrl;
+      link.download = filename;
       document.body.appendChild(link);
-      link.click(); // Simule un clic pour lancer le téléchargement
-      document.body.removeChild(link); // Supprime le lien temporaire
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(downloadUrl);
     } catch (error) {
-      console.error('Erreur lors du téléchargement de l\'image:', error);
+      console.error('Erreur lors du téléchargement du tract :', error);
     }
   };
 
@@ -29,9 +30,8 @@ const TractCard = ({ tract, onDelete, onEdit }) => {
     setIsOpen(!isOpen);
   };
 
-  // Détermine si le fichier est un PDF
-  const isPdf = tract.imageUrl && tract.imageUrl.toLowerCase().endsWith('.pdf');
-  const downloadLabel = isPdf ? 'Télécharger le PDF' : "Télécharger l'image";
+  const hasImage = Boolean(tract.imageUrl);
+  const hasPdf = Boolean(tract.pdfUrl);
 
   return (
     <div className="tract-card">
@@ -40,20 +40,26 @@ const TractCard = ({ tract, onDelete, onEdit }) => {
       {/* Effet de collapse pour afficher ou masquer l'image et le contenu */}
       {isOpen && (
         <div className="tract-content">
-          {tract.imageUrl && (
-            <div className='tract-card'>
-              {isPdf ? (
-                <iframe
-                  src={tract.imageUrl}
-                  title={tract.title}
-                  className="tract-pdf-preview"
-                  width="100%"
-                  height="400"
-                />
-              ) : (
-                <img src={tract.imageUrl} alt={tract.title} width="200" />
-              )}
-              <button onClick={handleDownloadImage}>{downloadLabel}</button>
+          {hasPdf && (
+            <div className='tract-media'>
+              <iframe
+                src={tract.pdfUrl}
+                title={tract.title}
+                className="tract-pdf-preview"
+                width="100%"
+                height="400"
+              />
+              <button onClick={() => handleDownloadAsset(tract.pdfUrl, `${tract.title || 'tract'}.pdf`)}>
+                Télécharger le PDF
+              </button>
+            </div>
+          )}
+          {hasImage && (
+            <div className='tract-media'>
+              <img src={tract.imageUrl} alt={tract.title} width="200" />
+              <button onClick={() => handleDownloadAsset(tract.imageUrl, `${tract.title || 'tract'}.jpg`)}>
+                Télécharger l'image
+              </button>
             </div>
           )}
           <div>
@@ -61,7 +67,7 @@ const TractCard = ({ tract, onDelete, onEdit }) => {
             {isLoggedIn && (
               <>
                 <button onClick={() => onDelete(tract._id)}>Supprimer</button>
-                <button onClick={() => onEdit(tract)}>Modifier</button>
+                {onEdit && <button onClick={() => onEdit(tract)}>Modifier</button>}
               </>
             )}
           </div>

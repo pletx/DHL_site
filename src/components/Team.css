@@ -1,16 +1,17 @@
 /* Container for the entire team section */
 .team-container {
-  padding: 20px;
+  padding: var(--spacing-lg);
   max-width: 1200px;
   margin: 0 auto;
+  background-color: var(--bg-primary);
 }
 
 /* Title for the team section */
 h2 {
   text-align: center;
-  font-size: 2.5rem;
-  margin-bottom: 20px;
-  color: #333;
+  font-size: 2rem;
+  margin-bottom: var(--spacing-lg);
+  color: var(--primary-color);
 }
 
 /* Container for the list of team members */
@@ -19,21 +20,27 @@ h2 {
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 20px;
+  gap: var(--spacing-lg);
 }
 
 /* Individual team member card */
 .team-member {
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  padding: 20px;
+  background: var(--text-white);
+  border: none;
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
   text-align: center;
-  transition: transform 0.3s;
+  transition: all var(--transition-base);
   max-width: 300px;
-  min-width: 250px; /* Ensure minimum width */
-  flex: 1 1 300px; /* Flex-grow, flex-shrink, and base width */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  min-width: 250px;
+  flex: 1 1 300px;
+  box-shadow: var(--shadow-md);
+  border-top: 4px solid var(--primary-color);
+}
+
+.team-member:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
 }
 
 .team-member img {
@@ -41,112 +48,86 @@ h2 {
   width: 120px;
   height: 120px;
   object-fit: cover;
-  margin-bottom: 15px;
-  border: 3px solid #e9ecef;
+  margin-bottom: var(--spacing-md);
+  border: 4px solid var(--primary-color);
+  transition: transform var(--transition-base);
+}
+
+.team-member img:hover {
+  transform: scale(1.05);
 }
 
 .team-photo-placeholder {
   width: 120px;
   height: 120px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #e9ecef, #ced4da);
+  background: linear-gradient(135deg, var(--bg-secondary), var(--text-light));
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 15px;
-  border: 3px solid #e9ecef;
+  margin: 0 auto var(--spacing-md);
+  border: 4px solid var(--primary-color);
 }
 
 .team-photo-placeholder i {
   font-size: 48px;
-  color: #adb5bd;
+  color: var(--primary-color);
 }
 
 .team-member h3 {
-  font-size: 1.5rem;
-  margin: 10px 0;
-  color: #555;
+  font-size: 1.25rem;
+  margin: var(--spacing-base) 0;
+  color: var(--text-primary);
+  font-weight: 600;
 }
 
 .team-member p {
-  font-size: 1.2rem;
-  color: #777;
-  margin-bottom: 15px;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-md);
+  line-height: 1.6;
 }
 
 /* Action buttons for edit and delete */
 .team-member button {
-  background: #007bff;
-  color: #fff;
+  background: var(--primary-color);
+  color: var(--text-white);
   border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--radius-md);
   cursor: pointer;
-  transition: background 0.3s;
-  margin: 5px;
+  transition: all var(--transition-base);
+  margin: var(--spacing-sm);
+  font-weight: 500;
 }
 
 .team-member button:hover {
-  background: #0056b3;
-}
-
-.team-member:hover {
-  transform: translateY(-5px);
+  background: var(--primary-dark);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
 }
 
 /* Form container for adding/editing team members */
 .team-form {
-  background: #f9f9f9;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  padding: 20px;
-  margin: 20px 0;
-}
-
-.team-form h3 {
-  font-size: 2rem;
-  margin-bottom: 15px;
-  color: #333;
-}
-
-.team-form input[type="text"],
-.team-form input[type="file"] {
-  width: calc(100% - 20px);
-  padding: 10px;
-  margin-bottom: 15px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-}
-
-.team-form button {
-  background: #28a745;
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-.team-form button:hover {
-  background: #218838;
-}
-
-.team-form button.cancel {
-  background: #dc3545;
-}
-
-.team-form button.cancel:hover {
-  background: #c82333;
+  background: var(--bg-secondary);
+  border: 2px solid var(--primary-color);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  margin-top: var(--spacing-xl);
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 @media (max-width: 768px) {
   .team-member {
-    max-width: 100%;
+    min-width: 200px;
+    flex: 1 1 200px;
   }
+}
 
-  .team-list {
-    flex-direction: column;
-    align-items: center;
+@media (max-width: 600px) {
+  .team-member {
+    flex: 1 1 100%;
   }
 }

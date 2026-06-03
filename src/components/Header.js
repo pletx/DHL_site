@@ -1,16 +1,28 @@
-import React, { useState, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useContext, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import './Header.css';
 import logoImage from '../assets/CGT transport.png';
 import bandeauImage from '../assets/Bandeau-cgt.png';
 import { AuthContext } from '../AuthContext';
 
 const Header = () => {
-  const { isLoggedIn, loading, login, logout } = useContext(AuthContext);
+  const { isLoggedIn, loading, login, logout, error: authError } = useContext(AuthContext);
   const [showLogin, setShowLogin] = useState(false);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const location = useLocation();
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    if (params.get('sessionExpired') === '1') {
+      setShowLogin(true);
+      setError('Votre session a expiré. Veuillez vous reconnecter.');
+      params.delete('sessionExpired');
+      const newSearch = params.toString();
+      window.history.replaceState({}, '', `${location.pathname}${newSearch ? `?${newSearch}` : ''}`);
+    }
+  }, [location.search, location.pathname]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -23,7 +35,7 @@ const Header = () => {
       setPassword('');
       window.location.reload(); // Rafraîchir la page pour mettre à jour l'état
     } catch (err) {
-      setError('Une erreur est survenue. Veuillez réessayer.');
+      setError(err?.message || 'Une erreur est survenue. Veuillez réessayer.');
     }
   };
 
@@ -91,7 +103,7 @@ const Header = () => {
           <div className="login-modal" onClick={(e) => e.stopPropagation()}>
             <form className="login-form" onSubmit={handleLogin}>
               <h2>Login</h2>
-              {error && <p className="error-message">{error}</p>}
+              {(error || authError) && <p className="error-message">{error || authError}</p>}
               <div className="form-group">
                 <label htmlFor="username">Nom d'utilisateur :</label>
                 <input
