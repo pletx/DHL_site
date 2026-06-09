@@ -232,9 +232,30 @@ const NosActions = () => {
             onEdit={handleEditAction}
           />
         ))}
-      </section>
 
-      
+        {isLoggedIn && (
+          <form onSubmit={handleSubmitAction} className="photo-upload-form">
+            <h3>Importer une photo</h3>
+            <input
+              type="text"
+              placeholder="Titre"
+              value={newAction.title}
+              onChange={(e) => setNewAction({ ...newAction, title: e.target.value })}
+            />
+            <textarea
+              placeholder="Texte"
+              value={newAction.text}
+              onChange={(e) => setNewAction({ ...newAction, text: e.target.value })}
+            />
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(e) => setNewAction({ ...newAction, image: e.target.files[0] })}
+            />
+            <button type="submit">Ajouter la photo</button>
+          </form>
+        )}
+      </section>
 
       
     </div>
