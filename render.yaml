@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: cgt-transport-express
+    env: static
+    buildCommand: npm run build
+    publishPath: ./dist # Utilisez ./build si vous utilisez Create React App au lieu de Vite
+    routes:
+      # 1. Laisse passer le sitemap et le fichier de validation Google sans les rediriger
+      - type: passthrough
+        source: /sitemap.xml
+      - type: passthrough
+        source: /google*.html
+
+      # 2. Redirige toutes les autres pages vers index.html pour éviter les erreurs 404 (React Router)
+      - type: rewrite
+        source: /*
+        destination: /index.html
