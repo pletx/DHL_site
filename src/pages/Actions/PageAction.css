@@ -15,7 +15,7 @@
   width: 100%;
   margin-bottom: var(--spacing-lg);
   font-size: 2rem;
-  color: var(--text-white);
+  color: rgb(43, 43, 43);
   font-weight: 600;
 }
 
@@ -36,7 +36,8 @@ section:hover {
 
 #courrier-section {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  
   align-items: center;
   justify-content: center;
 }

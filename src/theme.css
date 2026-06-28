@@ -125,7 +125,7 @@ button, .btn {
 
 /* Bouton principal */
 .btn-primary, button:not(.btn-secondary):not(.btn-ghost) {
-  background-color: var(--primary-color);
+ 
   color: var(--text-white);
 }
 

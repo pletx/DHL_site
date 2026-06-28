@@ -21,13 +21,14 @@ h2 {
 }
 
 /* Style d'une carte individuelle */
-.action-member {  width: 30%;
+.action-member {  width: 40%;
   min-width: 200px;
   padding: var(--spacing-base);
   background-color: var(--text-white);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-md);
   transition: all var(--transition-base);
+  margin: 15px;
   cursor: pointer;
   border-top: 4px solid var(--primary-color);
 }
