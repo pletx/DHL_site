@@ -67,7 +67,7 @@ h5{
 
 .social-link:hover {
   transform: scale(1.15);
-  background-color: var(--primary-color);
+  background-color:blue;
   color: var(--text-white);
 }
 

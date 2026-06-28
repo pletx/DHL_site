@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import api, { getApiErrorMessage } from '../api';
 import './Téléchargement.css';
 
-const Téléchargement = ({ type }) => {
+const Téléchargement = ({ type, showViewer = false }) => {
   const [pdfs, setPdfs] = useState([]);
   const [newPdf, setNewPdf] = useState({ title: '', file: null, type });
+  const [selectedPdf, setSelectedPdf] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false); // État de la connexion de l'utilisateur
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -82,11 +83,34 @@ const Téléchargement = ({ type }) => {
         </form>
       )}
 
+      {showViewer && selectedPdf && (
+        <div className="pdf-viewer-container">
+          <div className="pdf-viewer-header">
+            <h3>{selectedPdf.title}</h3>
+            <button className="pdf-button-close" onClick={() => setSelectedPdf(null)}>
+              Fermer
+            </button>
+          </div>
+          <iframe
+            src={selectedPdf.pdfUrl}
+            title={selectedPdf.title}
+            className="pdf-viewer"
+          />
+        </div>
+      )}
+
       <ul className="pdf-list">
         {pdfs.map(pdf => (
           <li key={pdf._id} className="pdf-item">
             <p>{pdf.title}</p>
-            <button className="pdf-button-download" onClick={() => window.open(getDownloadLink(pdf.pdfUrl), '_blank')}>Télécharger</button>
+            {showViewer && (
+              <button className="pdf-button-view" onClick={() => setSelectedPdf(pdf)}>
+                Voir
+              </button>
+            )}
+            <button className="pdf-button-download" onClick={() => window.open(getDownloadLink(pdf.pdfUrl), '_blank')}>
+              Télécharger
+            </button>
             {isLoggedIn && (
               <button className="pdf-button-delete" onClick={() => handleDeletePdf(pdf._id)}>Supprimer</button>
             )}

@@ -7,11 +7,6 @@ const Footer = () => {
       <div className="footer-row">
         {/* Logo + réseaux */}
         <div className="footer-brand">
-          <img
-            src="/static/media/CGT transport.3fa524beae51b295fe42.png"
-            alt="Logo CGT Transport"
-            className="footer-logo-img"
-          />
           <div className="footer-social">
             <a
               href="https://www.facebook.com/CgtDhlExpressIntl"
@@ -61,11 +56,10 @@ const Footer = () => {
         
       </div>
 
-      {/* Barre du bas */}
       <div className="footer-bottom-bar">
         <h5>Site syndical indépendant édité par le syndicat CGT des salariés de DHL International Express 
           Ce site n'est pas édité par DHL International Express et n'a aucun lien institutionnel avec celui-ci.</h5>
-        <p>© {new Date().getFullYear()} CGT DHL Express International — Tous droits réservés</p>
+        
         
       </div>
     </footer>

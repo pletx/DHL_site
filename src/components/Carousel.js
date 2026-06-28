@@ -112,10 +112,6 @@ const Carousel = () => {
       </div>
 
       <div style={{ display: 'flex', justifyContent: 'center', gap: '8px', marginTop: '8px' }}>
-        <button onClick={() => setAutoplay((v) => !v)} style={{ padding: '6px 10px', borderRadius: '6px' }}>
-          {autoplay ? 'Pause' : 'Play'}
-        </button>
-        <span style={{ alignSelf: 'center', color: 'var(--text-primary)' }}>{images.length} images</span>
       </div>
 
       {isLoggedIn && (

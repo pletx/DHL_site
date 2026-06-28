@@ -19,7 +19,7 @@ const Accords = () => {
 
       <section id='accords'>
         <h2>Accords</h2>
-        <Téléchargement type="accord" />
+        <Téléchargement type="accord" showViewer />
       </section>
 
       <section id='divers'>
