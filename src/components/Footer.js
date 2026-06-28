@@ -44,7 +44,7 @@ const Footer = () => {
           <Link to="/mentions-legales#cookies">Cookies</Link>
           <span className="footer-sep">|</span>
           <a
-            href="/assets/Statuts cgt.pdf"
+            href="/Statuts cgt.pdf"
             download
             target="_blank"
             rel="noopener noreferrer"
